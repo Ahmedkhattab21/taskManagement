@@ -18,8 +18,7 @@ class TaskManagement extends StatelessWidget {
       title: 'Task',
       theme: ThemeData(fontFamily: 'Mulish'),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
-      // onGenerateRoute:appRoute.generateRoute,
+      onGenerateRoute:appRoute.generateRoute,
     );
   }
 }
