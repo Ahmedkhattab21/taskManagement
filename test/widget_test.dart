@@ -14,8 +14,8 @@ import 'package:wtasks/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    // appRoute : AppRoute()
-    await tester.pumpWidget(TaskManagement());
+
+    await tester.pumpWidget(TaskManagement( appRoute : AppRoute()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

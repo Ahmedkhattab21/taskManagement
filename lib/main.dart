@@ -5,13 +5,13 @@ import 'app_route.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-//appRoute : AppRoute()
-  runApp( TaskManagement( ));
+
+  runApp( TaskManagement( appRoute : AppRoute()));
 }
 
 class TaskManagement extends StatelessWidget {
-  // AppRoute appRoute;
-  // TaskManagement({required this.appRoute});
+  AppRoute appRoute;
+  TaskManagement({required this.appRoute});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
