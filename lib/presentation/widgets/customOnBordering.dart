@@ -38,7 +38,6 @@ class CustomOnBoarding extends StatelessWidget {
             ),
           ),
         ),
-        // SizedBox(height: Dimension.getHeight(context, 9)),
       ],
     );
   }

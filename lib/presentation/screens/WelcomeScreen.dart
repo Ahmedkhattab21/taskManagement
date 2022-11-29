@@ -64,7 +64,7 @@ class WelcomeScreen extends StatelessWidget {
                     buttonWidth: 130,
                     onPressedCallback: onPressed,
                   ),
-                  // SizedBox(height: KSize.getHeight(context, 80.0))
+                  SizedBox(height: KSize.getHeight(context, 80.0))
                 ],
               ),
             ),
