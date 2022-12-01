@@ -10,7 +10,6 @@ import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
-import 'loginScreen.dart';
 
 
 class SignUpScreen extends StatelessWidget {
@@ -25,8 +24,9 @@ class SignUpScreen extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             titleSpacing: 0,
+            centerTitle: false,
             title: Padding(
-                padding: EdgeInsets.only(right: KSize.getWidth(context, 180.0)),
+                padding: EdgeInsets.only(left: KSize.getWidth(context, 40.0)),
                 child: GestureDetector(
                   child: Image.asset(
                     "assets/png/Back2.png",
@@ -90,10 +90,8 @@ class SignUpScreen extends StatelessWidget {
                     KButton(
                       title: "Continue",
                       onPressedCallback: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => ProfileSetupScreen()),
-                        // );
+                        print(AuthCubit.get(context).count);
+                        Navigator.pushNamed(context, profileSetup);
                       },
                     )
                   ],

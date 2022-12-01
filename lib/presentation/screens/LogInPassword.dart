@@ -23,8 +23,9 @@ class LogInPassword extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           titleSpacing: 0,
+          centerTitle: false,
           title: Padding(
-              padding: EdgeInsets.only(right: KSize.getWidth(context, 180.0)),
+              padding: EdgeInsets.only(left: KSize.getWidth(context, 40.0)),
               child: GestureDetector(
                 child: Image.asset(
                   "assets/png/Back2.png",

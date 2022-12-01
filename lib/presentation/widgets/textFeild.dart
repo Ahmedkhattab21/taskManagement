@@ -8,7 +8,7 @@ import '../../constant/my_colors.dart';
 
 class KTextField extends StatelessWidget {
   final String text;
-  final String hintText;
+  final String? hintText;
   final IconData? icon;
   final bool isPasswordField;
   final TextEditingController? controller;
@@ -16,7 +16,7 @@ class KTextField extends StatelessWidget {
   const KTextField(
       {Key? key,
         required this.text,
-        required this.hintText,
+         this.hintText,
         this.icon,
         this.isPasswordField = false,
         this.controller})
@@ -37,7 +37,6 @@ class KTextField extends StatelessWidget {
               controller: controller,
               obscureText: isPasswordField ? AuthCubit.get(context).obscureText : !AuthCubit.get(context).obscureText,
               onChanged: (value) {
-                print(value);
                 if (!isPasswordField) {
                   AuthCubit.get(context).isClearAbleTrue();
                 }
@@ -47,7 +46,7 @@ class KTextField extends StatelessWidget {
 
               },
               decoration: InputDecoration(
-                  hintText: hintText,
+                  hintText: hintText==null? "" :hintText,
                   hintStyle:const TextStyle(fontFamily: 'Mulilsh'),
                   suffixIcon: isPasswordField
                       ? IconButton(

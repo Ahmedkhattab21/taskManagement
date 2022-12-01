@@ -45,6 +45,8 @@ dev_dependencies:
   velocity_x: ^3.6.0
   easy_splash_screen: ^1.0.4
   dots_indicator: ^2.1.0
+  image_picker: ^0.8.6
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

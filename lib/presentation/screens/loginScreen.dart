@@ -17,19 +17,18 @@ class LogInEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,TaskStates>(
-      listener: (context,states){},
+      listener: (context,states){
+        print(states);
+      },
       builder:(context,states)=> Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: KColor.white,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             titleSpacing: 0,
-            // leading: IconButton(
-            //   icon:const Icon(Icons.arrow_back),color: Colors.black,
-            //   onPressed: ()=>Navigator.of(context).pop(),
-            // ),
+            centerTitle: false,
             title: Padding(
-                padding: EdgeInsets.only(right: KSize.getWidth(context, 180.0)),
+                padding: EdgeInsets.only(left: KSize.getWidth(context, 40.0)),
                 child: GestureDetector(
                   child: Image.asset(
                     "assets/png/Back2.png",
