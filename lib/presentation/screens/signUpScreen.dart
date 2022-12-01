@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wtasks/constant/string.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../buisiness_logic/cuibits/AuthCubit.dart';
@@ -6,28 +8,23 @@ import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
-import '../../constant/string.dart';
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
+import 'loginScreen.dart';
 
 
-class LogInEmail extends StatelessWidget {
-
+class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,TaskStates>(
-      listener: (context,states){},
-      builder:(context,states)=> Scaffold(
+        listener: (context,states){},
+        builder:(context,states)=> Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: KColor.white,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             titleSpacing: 0,
-            // leading: IconButton(
-            //   icon:const Icon(Icons.arrow_back),color: Colors.black,
-            //   onPressed: ()=>Navigator.of(context).pop(),
-            // ),
             title: Padding(
                 padding: EdgeInsets.only(right: KSize.getWidth(context, 180.0)),
                 child: GestureDetector(
@@ -42,12 +39,12 @@ class LogInEmail extends StatelessWidget {
                 )),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: KSize.getWidth(context, 40)),
+                padding: EdgeInsets.only(right: KSize.getWidth(context, 40.0)),
                 child: TextButton(
                   style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                  child:const Text("Create an Account", style: KTextStyle.caption2),
+                  child:const Text("Have Account? Log In", style: KTextStyle.caption2),
                   onPressed: () {
-                    Navigator.pushNamed(context, signUp);
+                    Navigator.pushNamed(context, logInEmail);
                   },
                 ),
               ),
@@ -57,18 +54,20 @@ class LogInEmail extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: KSize.getWidth(context, 40)),
+                padding: EdgeInsets.symmetric(horizontal: KSize.getWidth(context, 40.0)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: KSize.getWidth(context, 75)),
-                    Text("Log In",
+                    SizedBox(
+                      height: KSize.getHeight(context, 60),
+                    ),
+                    Text("Sign Up",
                         style: KTextStyle.headline4.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 32.0,
                         )),
                     SizedBox(height: KSize.getHeight(context, 8)),
-                    Text("What's your email?",
+                    Text("Sign up to continue.",
                         style: KTextStyle.subtitle2.copyWith(
                           fontWeight: FontWeight.w400,
                           color: KColor.dimGray,
@@ -76,20 +75,25 @@ class LogInEmail extends StatelessWidget {
                         )),
                     SizedBox(height: KSize.getHeight(context, 30)),
                     KTextField(
-                      controller: AuthCubit.get(context).emailControllerLogin,
+                      controller: AuthCubit.get(context).emailControllerUp,
                       text: "YOUR EMAIL",
                       hintText: "Email",
+                    ),
+                    SizedBox(height: KSize.getHeight(context, 30)),
+                    KTextField(
+                      controller: AuthCubit.get(context).passControllerUp,
+                      text: "YOUR PASSWORD",
+                      isPasswordField: true,
+                      hintText: "Password",
                     ),
                     SizedBox(height: KSize.getHeight(context, 40)),
                     KButton(
                       title: "Continue",
                       onPressedCallback: () {
-                        Navigator.pushNamed(
-                          context,
-                          logInPassword,
-                          arguments:
-                          AuthCubit.get(context).emailControllerLogin.text,
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => ProfileSetupScreen()),
+                        // );
                       },
                     )
                   ],

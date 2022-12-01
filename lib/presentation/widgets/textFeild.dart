@@ -37,12 +37,14 @@ class KTextField extends StatelessWidget {
               controller: controller,
               obscureText: isPasswordField ? AuthCubit.get(context).obscureText : !AuthCubit.get(context).obscureText,
               onChanged: (value) {
+                print(value);
                 if (!isPasswordField) {
                   AuthCubit.get(context).isClearAbleTrue();
                 }
                 if(value.length == 0){
                   AuthCubit.get(context).isClearAbleFalse();
                 }
+
               },
               decoration: InputDecoration(
                   hintText: hintText,

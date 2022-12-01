@@ -7,9 +7,11 @@ import '../task_states.dart';
 class AuthCubit extends Cubit<TaskStates>{
   AuthCubit():super(InitialState());
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailControllerLogin = TextEditingController();
+  TextEditingController passwordControllerLogin = TextEditingController();
 
+  TextEditingController emailControllerUp = TextEditingController();
+  TextEditingController passControllerUp = TextEditingController();
 
   bool isClearAble = false;
   bool obscureText = true;

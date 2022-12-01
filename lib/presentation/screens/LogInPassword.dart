@@ -5,6 +5,7 @@ import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../../constant/string.dart';
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
 
@@ -20,6 +21,20 @@ class LogInPassword extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: KColor.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          title: Padding(
+              padding: EdgeInsets.only(right: KSize.getWidth(context, 180.0)),
+              child: GestureDetector(
+                child: Image.asset(
+                  "assets/png/Back2.png",
+                  height: KSize.getHeight(context, 30),
+                  width: KSize.getWidth(context, 30),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              )),
           actions: [
             Padding(
               padding: EdgeInsets.only(right: KSize.getWidth(context, 40)),
@@ -27,10 +42,7 @@ class LogInPassword extends StatelessWidget {
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 child:const Text("Create an Account", style: KTextStyle.caption2),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => SignUpScreen()),
-                  // );
+                  Navigator.pushNamed(context, signUp);
                 },
               ),
             ),
@@ -80,7 +92,7 @@ class LogInPassword extends StatelessWidget {
                   BlocConsumer<AuthCubit,TaskStates>(
                     listener: (context,states){},
                     builder:(context,states)=> KTextField(
-                      controller: AuthCubit.get(context).passwordController,
+                      controller: AuthCubit.get(context).passwordControllerLogin,
                       text: "YOUR PASSWORD",
                       isPasswordField: true,
                       hintText: "Password",

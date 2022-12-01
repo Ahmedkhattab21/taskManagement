@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wtasks/presentation/screens/LogInPassword.dart';
 import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
+import 'package:wtasks/presentation/screens/signUpScreen.dart';
 
 import 'buisiness_logic/cuibits/AuthCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
@@ -28,7 +29,10 @@ class AppRoute{
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
             create: (BuildContext context)=>AuthCubit(),
             child: LogInPassword(text: tx,)));
-
+      case signUp:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
+            create: (BuildContext context)=>AuthCubit(),
+            child: SignUpScreen()));
     }
   }
 }
