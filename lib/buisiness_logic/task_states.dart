@@ -14,4 +14,5 @@ class GetImageFromCameraState extends TaskStates{}
 class GetImageFromGalaryState extends TaskStates{}
 class countplus extends TaskStates{}
 
+class ChangeCurrentIndexState extends TaskStates{}
 

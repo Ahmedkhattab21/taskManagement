@@ -104,8 +104,9 @@ class LogInPassword extends StatelessWidget {
                   KButton(
                     title: "Continue",
                     onPressedCallback: () {
+                      Navigator.pushNamedAndRemoveUntil(context, bottomNavigationBar, (route) => false);
                       // Navigator.of(context)
-                      //     .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => KBottomNavigationBar()), (Route<dynamic> route) => false);
+                      //     .pushNamedAndRemoveUntil(, (Route<dynamic> route) => false);
                     },
                   )
                 ],

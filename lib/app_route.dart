@@ -5,8 +5,10 @@ import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
 import 'package:wtasks/presentation/screens/profileSetupScreen.dart';
 import 'package:wtasks/presentation/screens/signUpScreen.dart';
+import 'package:wtasks/presentation/widgets/KBottomNavigationBar.dart';
 
 import 'buisiness_logic/cuibits/AuthCubit.dart';
+import 'buisiness_logic/cuibits/BottomNavigationBarCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
 import 'constant/string.dart';
 import 'presentation/screens/SplashScreen.dart';
@@ -38,6 +40,10 @@ class AppRoute{
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
             create: (BuildContext context)=>AuthCubit(),
             child:const ProfileSetupScreen()));
+      case bottomNavigationBar:
+        return MaterialPageRoute(builder:(BuildContext ctx)=>BlocProvider(
+            create:(BuildContext context)=>BottomNavigationBarCubit() ,
+            child: const KBottomNavigationBar()));
     }
   }
 }

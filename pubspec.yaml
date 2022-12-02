@@ -46,6 +46,7 @@ dev_dependencies:
   easy_splash_screen: ^1.0.4
   dots_indicator: ^2.1.0
   image_picker: ^0.8.6
+  vector_math: ^2.1.2
 
 
 
