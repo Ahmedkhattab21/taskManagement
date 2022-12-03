@@ -16,3 +16,4 @@ class countplus extends TaskStates{}
 
 class ChangeCurrentIndexState extends TaskStates{}
 
+class ChangeTaskState extends TaskStates{}

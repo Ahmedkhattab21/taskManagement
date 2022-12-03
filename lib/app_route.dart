@@ -11,6 +11,7 @@ import 'package:wtasks/presentation/widgets/KBottomNavigationBar.dart';
 import 'buisiness_logic/cuibits/AuthCubit.dart';
 import 'buisiness_logic/cuibits/BottomNavigationBarCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
+import 'buisiness_logic/cuibits/TaskDetailsCubit.dart';
 import 'constant/string.dart';
 import 'presentation/screens/SplashScreen.dart';
 class AppRoute{
@@ -46,7 +47,9 @@ class AppRoute{
             create:(BuildContext context)=>BottomNavigationBarCubit() ,
             child: const KBottomNavigationBar()));
       case taskDetailsScreen:
-        return MaterialPageRoute(builder:(BuildContext ctx)=> TaskDetailsScreen());
+        return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
+            create:(BuildContext context)=>TaskDetailsCubit() ,
+            child: TaskDetailsScreen()));
     }
   }
 }
