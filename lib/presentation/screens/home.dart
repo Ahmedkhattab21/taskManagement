@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../widgets/TaskCard.dart';
 import '../widgets/TaskDetailsCard.dart';
 
 
@@ -101,24 +102,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: KSize.getHeight(context, 19.0)),
-              // TaskCard(
-              //   taskTitle: "App Design",
-              //   taskSubTitle: "Team Project Working On Figma",
-              //   numberOfParticipants: 10,
-              //   taskProgress: 75,
-              // ),
-              // TaskCard(
-              //   taskTitle: "Illustration",
-              //   taskSubTitle: "Team Project Working On Figma",
-              //   numberOfParticipants: 10,
-              //   taskProgress: 17,
-              // ),
-              // TaskCard(
-              //   taskTitle: "3d Making Project",
-              //   taskSubTitle: "Team Project Working On Figma",
-              //   numberOfParticipants: 10,
-              //   taskProgress: 55,
-              // ),
+              TaskCard(
+                taskTitle: "App Design",
+                taskSubTitle: "Team Project Working On Figma",
+                numberOfParticipants: 10,
+                taskProgress: 75,
+              ),
+              TaskCard(
+                taskTitle: "Illustration",
+                taskSubTitle: "Team Project Working On Figma",
+                numberOfParticipants: 10,
+                taskProgress: 17,
+              ),
+              TaskCard(
+                taskTitle: "3d Making Project",
+                taskSubTitle: "Team Project Working On Figma",
+                numberOfParticipants: 10,
+                taskProgress: 55,
+              ),
             ],
           ),
         ),

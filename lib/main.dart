@@ -21,10 +21,10 @@ class TaskManagement extends StatelessWidget {
       title: 'Task',
       theme: ThemeData(fontFamily: 'Mulish'),
       debugShowCheckedModeBanner: false,
-      home:  BlocProvider(
-          create:(BuildContext context)=>BottomNavigationBarCubit() ,
-          child: const KBottomNavigationBar()),
-      // onGenerateRoute:appRoute.generateRoute,
+      // home:  BlocProvider(
+      //     create:(BuildContext context)=>BottomNavigationBarCubit() ,
+      //     child: const KBottomNavigationBar()),
+      onGenerateRoute:appRoute.generateRoute,
     );
   }
 }

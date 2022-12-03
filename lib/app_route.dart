@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wtasks/presentation/screens/LogInPassword.dart';
 import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
+import 'package:wtasks/presentation/screens/TaskDetailsScreen.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
 import 'package:wtasks/presentation/screens/profileSetupScreen.dart';
 import 'package:wtasks/presentation/screens/signUpScreen.dart';
@@ -44,6 +45,8 @@ class AppRoute{
         return MaterialPageRoute(builder:(BuildContext ctx)=>BlocProvider(
             create:(BuildContext context)=>BottomNavigationBarCubit() ,
             child: const KBottomNavigationBar()));
+      case taskDetailsScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> TaskDetailsScreen());
     }
   }
 }
