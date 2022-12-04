@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wtasks/presentation/screens/CreateProjectScreen.dart';
+import 'package:wtasks/presentation/screens/CreateTaskScreen.dart';
+import 'package:wtasks/presentation/screens/CreateTeamScreen.dart';
 import 'package:wtasks/presentation/screens/LogInPassword.dart';
 import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
+import 'package:wtasks/presentation/screens/SelectMemberScreen.dart';
 import 'package:wtasks/presentation/screens/TaskDetailsScreen.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
 import 'package:wtasks/presentation/screens/profileSetupScreen.dart';
@@ -50,6 +54,14 @@ class AppRoute{
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
             create:(BuildContext context)=>TaskDetailsCubit() ,
             child: TaskDetailsScreen()));
+      case createTaskScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=>const CreateTaskScreen());
+      case createProjectScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=>const CreateProjectScreen());
+      case createTeamScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> CreateTeamScreen());
+      case selectMemberScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> SelectMemberScreen());
     }
   }
 }

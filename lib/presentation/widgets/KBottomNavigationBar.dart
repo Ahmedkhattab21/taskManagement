@@ -7,6 +7,8 @@ import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constant/string.dart';
+
 
 
 class KBottomNavigationBar extends StatelessWidget {
@@ -154,10 +156,8 @@ class KBottomNavigationBar extends StatelessWidget {
                           ],
                         ),
                         onTap: () {
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => CreateTaskScreen()),
-                          // );
+                          Navigator.pushReplacementNamed(
+                            context, createTaskScreen);
                         },
                       ),
                       Container(
@@ -184,10 +184,7 @@ class KBottomNavigationBar extends StatelessWidget {
                           ],
                         ),
                         onTap: () {
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => CreateProjectScreen()),
-                          // );
+                          Navigator.pushReplacementNamed(context, createProjectScreen);
                         },
                       ),
                       Container(
@@ -214,10 +211,8 @@ class KBottomNavigationBar extends StatelessWidget {
                           ],
                         ),
                         onTap: () {
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => CreateTeamScreen()),
-                          // );
+                          Navigator.pushReplacementNamed(
+                            context,createTeamScreen);
                         },
                       ),
                       Container(
