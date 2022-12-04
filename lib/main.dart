@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app_route.dart';
 import 'buisiness_logic/cuibits/BottomNavigationBarCubit.dart';
+import 'constant/k_size.dart';
 
 
 void main() async{
@@ -21,9 +22,6 @@ class TaskManagement extends StatelessWidget {
       title: 'Task',
       theme: ThemeData(fontFamily: 'Mulish'),
       debugShowCheckedModeBanner: false,
-      // home:  BlocProvider(
-      //     create:(BuildContext context)=>BottomNavigationBarCubit() ,
-      //     child: const KBottomNavigationBar()),
       onGenerateRoute:appRoute.generateRoute,
     );
   }

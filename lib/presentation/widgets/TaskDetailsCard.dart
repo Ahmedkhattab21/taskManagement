@@ -25,82 +25,85 @@ class TaskDetailsCard extends StatelessWidget {
         ),
         Container(
           padding: EdgeInsets.all(30),
-          height: KSize.getHeight(context, 185),
+          height: KSize.getHeight(context, 200),
           width: KSize.getWidth(context, 327),
           decoration: BoxDecoration(color: KColor.ultramarineBlue, borderRadius: BorderRadius.circular(30)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("App Design",
-                        style: KTextStyle.headline4.copyWith(color: KColor.white, fontSize: 26.0, fontWeight: FontWeight.bold, height: 28 / 26)),
-                    SizedBox(height: KSize.getHeight(context, 8)),
-                    Text("Task manager ui kit", style: KTextStyle.subtitle2.copyWith(color: KColor.periwinkleCrayola, height: 16 / 14)),
-                    SizedBox(height: KSize.getHeight(context, 24)),
-                    GestureDetector(
-                      // onLongPressEnd: (LongPressEndDetails){
-                      //   print(LongPressEndDetails.localPosition.dx);
-                      // },
-                      // onHorizontalDragUpdate: (details) async {
-                      //
-                      //   // Note: Sensitivity is integer used when you don't want to mess up vertical drag
-                      //   int sensitivity = 8;
-                      //   if (details.delta.dx > sensitivity) {
-                      //     // Right Swipe
-                      //     print('right swipe -- ');
-                      //     // Navigator.push(
-                      //     //   context,
-                      //     //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
-                      //     // );
-                      //     print(details.delta.dx);
-                      //     print(sensitivity);
-                      //   } else if (details.delta.dx < -sensitivity) {
-                      //     //Left Swipe
-                      //     print('left swipe -- ');
-                      //     print(details.delta.dx);
-                      //
-                      //   }
-                      // },
-                      onTap: () {
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("App Design",
+                          style: KTextStyle.headline4.copyWith(color: KColor.white, fontSize: 26.0, fontWeight: FontWeight.bold, height: 28 / 26)),
+                      SizedBox(height: KSize.getHeight(context, 8)),
+                      Text("Task manager ui kit", style: KTextStyle.subtitle2.copyWith(color: KColor.periwinkleCrayola, height: 16 / 14)),
+                      SizedBox(height: KSize.getHeight(context, 24)),
+                      GestureDetector(
+                        // onLongPressEnd: (LongPressEndDetails){
+                        //   print(LongPressEndDetails.localPosition.dx);
+                        // },
+                        // onHorizontalDragUpdate: (details) async {
+                        //
+                        //   // Note: Sensitivity is integer used when you don't want to mess up vertical drag
+                        //   int sensitivity = 8;
+                        //   if (details.delta.dx > sensitivity) {
+                        //     // Right Swipe
+                        //     print('right swipe -- ');
+                        //     // Navigator.push(
+                        //     //   context,
+                        //     //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
+                        //     // );
+                        //     print(details.delta.dx);
+                        //     print(sensitivity);
+                        //   } else if (details.delta.dx < -sensitivity) {
+                        //     //Left Swipe
+                        //     print('left swipe -- ');
+                        //     print(details.delta.dx);
+                        //
+                        //   }
+                        // },
+                        onTap: () {
 
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
-                        // );
-                      },
-                      child: Container(
-                        width: KSize.getWidth(context, 104),
-                        height: KSize.getHeight(context, 38),
-                        decoration: BoxDecoration(color: KColor.white.withOpacity(0.40), borderRadius: BorderRadius.circular(20)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: KSize.getWidth(context, 38),
-                              height: KSize.getHeight(context, 38),
-                              decoration: BoxDecoration(color: KColor.white, shape: BoxShape.circle),
-                              child: Center(
-                                child: Image.asset(
-                                  "assets/png/Arrow - Down 2.png",
-                                  width: KSize.getWidth(context, 6),
-                                  height: KSize.getHeight(context, 11),
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
+                          // );
+                        },
+                        child: Container(
+                          width: KSize.getWidth(context, 100),
+                          height: KSize.getHeight(context, 38),
+                          decoration: BoxDecoration(color: KColor.white.withOpacity(0.40), borderRadius: BorderRadius.circular(20)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: KSize.getWidth(context, 38),
+                                height: KSize.getHeight(context, 38),
+                                decoration: BoxDecoration(color: KColor.white, shape: BoxShape.circle),
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/png/Arrow - Down 2.png",
+                                    width: KSize.getWidth(context, 6),
+                                    height: KSize.getHeight(context, 11),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(right: 15),
-                                child: Text("Details",
-                                    style: KTextStyle.subtitle2
-                                        .copyWith(color: KColor.white, fontSize: 12, fontWeight: FontWeight.normal, height: 14 / 12)))
-                          ],
+                              Padding(
+                                  padding: EdgeInsets.only(right: 15),
+                                  child: Text("Details",
+                                      style: KTextStyle.subtitle2
+                                          .copyWith(color: KColor.white, fontSize: 12, fontWeight: FontWeight.normal, height: 14 / 12)))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 200,),
+                    ],
+                  ),
                 ),
               ),
               Stack(children: [
