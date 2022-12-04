@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wtasks/presentation/screens/CreateProjectScreen.dart';
 import 'package:wtasks/presentation/screens/CreateTaskScreen.dart';
 import 'package:wtasks/presentation/screens/CreateTeamScreen.dart';
+import 'package:wtasks/presentation/screens/EditProfileScreen.dart';
 import 'package:wtasks/presentation/screens/LogInPassword.dart';
 import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
+import 'package:wtasks/presentation/screens/ProfileScreen.dart';
 import 'package:wtasks/presentation/screens/SelectMemberScreen.dart';
 import 'package:wtasks/presentation/screens/TaskDetailsScreen.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
@@ -62,6 +64,10 @@ class AppRoute{
         return MaterialPageRoute(builder:(BuildContext ctx)=> CreateTeamScreen());
       case selectMemberScreen:
         return MaterialPageRoute(builder:(BuildContext ctx)=> SelectMemberScreen());
+      case profileScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> ProfileScreen());
+      case editProfileScreen:
+        return MaterialPageRoute(builder:(BuildContext ctx)=> EditProfileScreen());
     }
   }
 }

@@ -10,3 +10,5 @@ const createTaskScreen ="/createTaskScreen";
 const createProjectScreen='/createProjectScreen';
 const createTeamScreen="/createTeamScreen";
 const selectMemberScreen="/selectMemberScreen";
+const profileScreen="/profileScreen";
+const editProfileScreen='/editProfileScreen';

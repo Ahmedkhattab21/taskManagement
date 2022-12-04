@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';
-import '../../presentation/screens/profileInfo.dart';
 import '../task_states.dart';
 
 class BottomNavigationBarCubit extends Cubit<TaskStates>{
@@ -14,7 +14,7 @@ class BottomNavigationBarCubit extends Cubit<TaskStates>{
     // HomeScreen(),
     // ProfileScreen(hideBackButton: true),
     HomeScreen(),
-    Profile()
+    ProfileScreen(hideBackButton: true)
   ];
 
   setCurrentIndex(int navIndex){

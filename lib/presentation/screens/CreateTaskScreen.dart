@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';

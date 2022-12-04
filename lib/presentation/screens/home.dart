@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../../constant/string.dart';
 import '../widgets/TaskCard.dart';
 import '../widgets/TaskDetailsCard.dart';
 
@@ -39,10 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ProfileScreen()),
-            // );
+            Navigator.pushNamed(
+              context, profileScreen);
           },
         ),
       ),
