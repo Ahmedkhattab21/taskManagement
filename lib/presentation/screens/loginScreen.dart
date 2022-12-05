@@ -18,7 +18,7 @@ class LogInEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,TaskStates>(
       listener: (context,states){
-        print(states);
+
       },
       builder:(context,states)=> Scaffold(
           resizeToAvoidBottomInset: false,
@@ -76,6 +76,7 @@ class LogInEmail extends StatelessWidget {
                     SizedBox(height: KSize.getHeight(context, 30)),
                     KTextField(
                       controller: AuthCubit.get(context).emailControllerLogin,
+                      type: "mail",
                       text: "YOUR EMAIL",
                       hintText: "Email",
                     ),
@@ -83,11 +84,15 @@ class LogInEmail extends StatelessWidget {
                     KButton(
                       title: "Continue",
                       onPressedCallback: () {
-                        Navigator.pushNamed(
+                       if (!AuthCubit.get(context).formKeyemail.currentState!.validate()) {
+                         return;
+                       }
+                       AuthCubit.get(context).formKeyemail.currentState!.save;
+                       FocusScope.of(context).unfocus();
+                       Navigator.pushNamed(
                           context,
                           logInPassword,
-                          arguments:
-                          AuthCubit.get(context).emailControllerLogin.text,
+                         arguments: AuthCubit.get(context).passwordControllerLogin.text,
                         );
                       },
                     )

@@ -22,48 +22,57 @@ class KBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<BottomNavigationBarCubit,TaskStates>(
       listener: (context,states){},
-      builder:(context,states)=> Scaffold(
-        backgroundColor: Colors.white,
-        body: BottomNavigationBarCubit.get(context).bottomNavPages[BottomNavigationBarCubit.get(context).currentIndex],
-        bottomNavigationBar: Container(
-          height: KSize.getHeight(context, 95),
-          decoration:const BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(color: KColor.shadowColor, blurRadius: 44, spreadRadius: 0, offset: Offset(0, -15)),
-            ],
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30),
-              topLeft: Radius.circular(30),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                child: Container(
-                  margin: EdgeInsets.only(left: KSize.getWidth(context, 24.0)),
-                  height: KSize.getHeight(context, 50.0),
-                  width: KSize.getWidth(context, 50.0),
-                  decoration:const BoxDecoration(shape: BoxShape.circle, color: KColor.eerieBlack),
-                  child: Center(
-                    child: Image.asset(
-                      "assets/png/create.png",
-                      height: KSize.getHeight(context, 20.0),
-                      width: KSize.getWidth(context, 20.0),
-                    ),
-                  ),
+      builder:(context,states) {
+        if(states is OnLoginedState){
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: BottomNavigationBarCubit.get(context).bottomNavPages[BottomNavigationBarCubit.get(context).currentIndex],
+            bottomNavigationBar: Container(
+              height: KSize.getHeight(context, 95),
+              decoration:const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(color: KColor.shadowColor, blurRadius: 44, spreadRadius: 0, offset: Offset(0, -15)),
+                ],
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
                 ),
-                onTap: () {
-                  _showPopup(context);
-                },
               ),
-              _buildBottomNavItem(context, "assets/png/Home.png", 0),
-              _buildBottomNavItem(context, "assets/png/Filter.png", 1),
-            ],
-          ),
-        ),
-      ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    child: Container(
+                      margin: EdgeInsets.only(left: KSize.getWidth(context, 24.0)),
+                      height: KSize.getHeight(context, 50.0),
+                      width: KSize.getWidth(context, 50.0),
+                      decoration:const BoxDecoration(shape: BoxShape.circle, color: KColor.eerieBlack),
+                      child: Center(
+                        child: Image.asset(
+                          "assets/png/create.png",
+                          height: KSize.getHeight(context, 20.0),
+                          width: KSize.getWidth(context, 20.0),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      _showPopup(context);
+                    },
+                  ),
+                  _buildBottomNavItem(context, "assets/png/Home.png", 0),
+                  _buildBottomNavItem(context, "assets/png/Filter.png", 1),
+                ],
+              ),
+            ),
+          );
+        }
+        else {
+          return Container(color: Colors.red,);
+        }
+
+
+      },
     );
   }
 

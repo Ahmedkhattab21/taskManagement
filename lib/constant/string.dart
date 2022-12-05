@@ -1,3 +1,4 @@
+const baseUrl='https://task.waqty.ml';
 const splashScreen='/';
 const onBoardingScreen='/onBorderScreen';
 const logInEmail='/loginEmail';

@@ -83,9 +83,9 @@ class ProfileSetupScreen extends StatelessWidget {
                         }
                       )),
                       SizedBox(height: KSize.getHeight(context, 50)),
-                    const KTextField(text: "First Name"),
+                     KTextField(text: "First Name"),
                       SizedBox(height: KSize.getHeight(context, 30)),
-                     const KTextField(text: "Last Name"),
+                      KTextField(text: "Last Name"),
                       SizedBox(height: KSize.getHeight(context, 40)),
                       KButton(
                         title: "Continue",

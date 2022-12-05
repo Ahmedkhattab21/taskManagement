@@ -90,7 +90,6 @@ class SignUpScreen extends StatelessWidget {
                     KButton(
                       title: "Continue",
                       onPressedCallback: () {
-                        print(AuthCubit.get(context).count);
                         Navigator.pushNamed(context, profileSetup);
                       },
                     )

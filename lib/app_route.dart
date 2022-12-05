@@ -19,8 +19,16 @@ import 'buisiness_logic/cuibits/BottomNavigationBarCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
 import 'buisiness_logic/cuibits/TaskDetailsCubit.dart';
 import 'constant/string.dart';
+import 'data/repository/Repository.dart';
+import 'data/web_services/web_services.dart';
 import 'presentation/screens/SplashScreen.dart';
 class AppRoute{
+  late Repository repository;
+  late AuthCubit authCubit;
+  AppRoute(){
+    repository=Repository(WebServices());
+    authCubit=AuthCubit(repository);
+  }
   Route? generateRoute(RouteSettings setting){
     switch(setting.name){
       case splashScreen:
@@ -33,20 +41,19 @@ class AppRoute{
         );
       case logInEmail:
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
-            create: (BuildContext context)=>AuthCubit(),
+            create: (BuildContext context)=>authCubit,
             child: LogInEmail()));
       case logInPassword:
-        String tx=setting.arguments.toString();
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
-            create: (BuildContext context)=>AuthCubit(),
-            child: LogInPassword(text: tx,)));
+            create: (BuildContext context)=>authCubit,
+            child: LogInPassword()));
       case signUp:
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
-            create: (BuildContext context)=>AuthCubit(),
+            create: (BuildContext context)=>AuthCubit(repository),
             child: SignUpScreen()));
       case profileSetup:
         return MaterialPageRoute(builder:(BuildContext ctx)=> BlocProvider(
-            create: (BuildContext context)=>AuthCubit(),
+            create: (BuildContext context)=>AuthCubit(repository),
             child:const ProfileSetupScreen()));
       case bottomNavigationBar:
         return MaterialPageRoute(builder:(BuildContext ctx)=>BlocProvider(

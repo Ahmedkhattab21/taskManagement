@@ -6,14 +6,14 @@ import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
+import '../../data/repository/Repository.dart';
+import '../../data/web_services/web_services.dart';
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
 
 
 class LogInPassword extends StatelessWidget {
-  final String text;
 
-  const LogInPassword({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -51,66 +51,71 @@ class LogInPassword extends StatelessWidget {
           backgroundColor: KColor.white,
           elevation: 0,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: KSize.getWidth(context, 40)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: KSize.getWidth(context, 75)),
-                  Text("Log In",
-                      style: KTextStyle.headline4.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32.0,
-                      )),
-                  SizedBox(height: KSize.getHeight(context, 8)),
-                  RichText(
-                    text: TextSpan(
-                        text: "Using ",
-                        style: KTextStyle.subtitle2.copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: KColor.dimGray,
-                          fontSize: 13.0,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: text.isEmpty ? 'example@email.com' : text,
-                              style: KTextStyle.subtitle2.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13.0,
-                              )),
-                          TextSpan(
-                            text: " to log in",
-                            style: KTextStyle.subtitle2.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: KColor.dimGray,
-                              fontSize: 13.0,
-                            ),
+        body: BlocConsumer<AuthCubit,TaskStates>(
+        listener: (context,states){},
+         builder:(context,states) =>SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: KSize.getWidth(context, 40)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: KSize.getWidth(context, 75)),
+                    Text("Log In",
+                        style: KTextStyle.headline4.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32.0,
+                        )),
+                    SizedBox(height: KSize.getHeight(context, 8)),
+                    RichText(
+                      text: TextSpan(
+                          text: "Using ",
+                          style: KTextStyle.subtitle2.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: KColor.dimGray,
+                            fontSize: 13.0,
                           ),
-                        ]),
-                  ),
-                  SizedBox(height: KSize.getHeight(context, 30)),
-                  BlocConsumer<AuthCubit,TaskStates>(
-                    listener: (context,states){},
-                    builder:(context,states)=> KTextField(
-                      controller: AuthCubit.get(context).passwordControllerLogin,
-                      text: "YOUR PASSWORD",
-                      isPasswordField: true,
-                      hintText: "Password",
+                          children: [
+                            TextSpan(
+                                text: AuthCubit.get(context).emailControllerLogin.text.isEmpty ? 'example@email.com' : AuthCubit.get(context).emailControllerLogin.text,
+                                style: KTextStyle.subtitle2.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.0,
+                                )),
+                            TextSpan(
+                              text: " to log in",
+                              style: KTextStyle.subtitle2.copyWith(
+                                fontWeight: FontWeight.w400,
+                                color: KColor.dimGray,
+                                fontSize: 13.0,
+                              ),
+                            ),
+                          ]),
+                    ),
+                    SizedBox(height: KSize.getHeight(context, 30)),
+                    KTextField(
+                        controller: AuthCubit.get(context).passwordControllerLogin,
+                        text: "YOUR PASSWORD",
+                        isPasswordField: true,
+                        hintText: "Password",
+                        type: "pass",
+
 
                     ),
-                  ),
-                  SizedBox(height: KSize.getHeight(context, 40)),
-                  KButton(
-                    title: "Continue",
-                    onPressedCallback: () {
-                      Navigator.pushNamedAndRemoveUntil(context, bottomNavigationBar, (route) => false);
-                      // Navigator.of(context)
-                      //     .pushNamedAndRemoveUntil(, (Route<dynamic> route) => false);
-                    },
-                  )
-                ],
-              )),
+                    SizedBox(height: KSize.getHeight(context, 40)),
+                    KButton(
+                      title: "Continue",
+                      onPressedCallback:()async{
+                        FocusScope.of(context).unfocus();
+                        AuthCubit.get(context).login();
+                       //  WebServices().login("user@site.com", "12345678");
+                        Navigator.pushNamedAndRemoveUntil(context, bottomNavigationBar, (route) => false);
+                        // Navigator.of(context)
+                        //     .pushNamedAndRemoveUntil(, (Route<dynamic> route) => false);
+                      },
+                    )
+                  ],
+                )),
+          ),
         ));
   }
 }

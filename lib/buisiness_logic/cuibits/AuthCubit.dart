@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import '../../data/repository/Repository.dart';
 import '../task_states.dart';
 
 class AuthCubit extends Cubit<TaskStates>{
-  AuthCubit():super(InitialState());
+  Repository repository;
+  AuthCubit(this.repository):super(InitialState());
 
   TextEditingController emailControllerLogin = TextEditingController();
   TextEditingController passwordControllerLogin = TextEditingController();
@@ -19,11 +21,7 @@ class AuthCubit extends Cubit<TaskStates>{
   TextEditingController emailControllerUp = TextEditingController();
   TextEditingController passControllerUp = TextEditingController();
 
-  int count=1;
-  counttt(){
-    count++;
-    emit(countplus());
-  }
+
 
   ImagePicker picker = ImagePicker();
   File? pikedImage;
@@ -60,6 +58,37 @@ class AuthCubit extends Cubit<TaskStates>{
   void password() {
     obscureText = !obscureText;
     emit(OnPasswordChangeState());
+  }
+
+  //...Validate and Auth......
+  final GlobalKey<FormState> formKeyemail = GlobalKey();
+  final GlobalKey<FormState> formKeypass = GlobalKey();
+
+
+  validateEmail(val) {
+
+    if (val!.isEmpty || !val.contains("@")) {
+      return "Invalid email";
+    }
+    return null;
+  }
+
+  validatePassword(val) {
+    if (val!.isEmpty || val.length < 5) {
+      return "Passworf is too short";
+    }
+    return null;
+  }
+  //....repositry.........
+   login(){
+    repository.login(emailControllerLogin.text.toString(),passwordControllerLogin.text.toString()).
+    then((value){
+      print(77777);
+      emit(OnLoginedState());
+    }).catchError((e){
+      print(111);
+      emit(OnErrorState());
+    });
   }
 
   static AuthCubit get(context)=>BlocProvider.of(context);
