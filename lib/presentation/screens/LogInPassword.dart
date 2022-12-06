@@ -98,8 +98,6 @@ class LogInPassword extends StatelessWidget {
                         isPasswordField: true,
                         hintText: "Password",
                         type: "pass",
-
-
                     ),
                     SizedBox(height: KSize.getHeight(context, 40)),
                     KButton(
@@ -107,10 +105,12 @@ class LogInPassword extends StatelessWidget {
                       onPressedCallback:()async{
                         FocusScope.of(context).unfocus();
                         AuthCubit.get(context).login();
-                       //  WebServices().login("user@site.com", "12345678");
-                        Navigator.pushNamedAndRemoveUntil(context, bottomNavigationBar, (route) => false);
-                        // Navigator.of(context)
-                        //     .pushNamedAndRemoveUntil(, (Route<dynamic> route) => false);
+                        if(!AuthCubit.get(context).formKeypass.currentState!.validate()){
+                          return ;
+                        }
+                        // Navigator.pushReplacementNamed(context, bottomNavigationBar);
+                        Navigator.of(context)
+                            .pushNamedAndRemoveUntil(bottomNavigationBar, (Route<dynamic> route) => false);
                       },
                     )
                   ],

@@ -9,10 +9,10 @@ class Repository{
     try {
       Map<String,dynamic> user = await webServices.login(email, pass);
       taken = user['authorisation']['token'];
-
+      print(taken);
       return user;
     }catch(e){
-      print(e);
+      throw "error in Login ";
     }
   }
   }

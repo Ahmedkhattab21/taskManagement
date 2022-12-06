@@ -8,6 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wtasks/app_route.dart';
+import 'package:wtasks/data/repository/Repository.dart';
+import 'package:wtasks/data/web_services/web_services.dart';
 
 import 'package:wtasks/main.dart';
 
@@ -15,7 +17,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
 
-    await tester.pumpWidget(TaskManagement( appRoute : AppRoute()));
+    await tester.pumpWidget(TaskManagement( repository : Repository(WebServices())));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

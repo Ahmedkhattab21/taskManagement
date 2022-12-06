@@ -44,7 +44,7 @@ class KTextField extends StatelessWidget {
               obscureText: isPasswordField ? AuthCubit.get(context).obscureText : !AuthCubit.get(context).obscureText,
               onChanged: (value) {
                 type=="mail"?
-                AuthCubit.get(context).formKeyemail.currentState!.validate():AuthCubit.get(context).formKeyemail.currentState!.validate();
+                AuthCubit.get(context).formKeyemail.currentState!.validate():AuthCubit.get(context).formKeypass.currentState!.validate();
                 if (!isPasswordField) {
                   AuthCubit.get(context).isClearAbleTrue();
                 }

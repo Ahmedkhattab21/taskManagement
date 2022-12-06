@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wtasks/buisiness_logic/cuibits/AuthCubit.dart';
 
-import '../../buisiness_logic/cuibits/BottomNavigationBarCubit.dart';
 import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
@@ -16,17 +16,15 @@ class KBottomNavigationBar extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BottomNavigationBarCubit,TaskStates>(
+    return BlocConsumer<AuthCubit,TaskStates>(
       listener: (context,states){},
       builder:(context,states) {
-        if(states is OnLoginedState){
+        if(states is OnLoginSuccessState){
           return Scaffold(
             backgroundColor: Colors.white,
-            body: BottomNavigationBarCubit.get(context).bottomNavPages[BottomNavigationBarCubit.get(context).currentIndex],
+            body: AuthCubit.get(context).bottomNavPages[AuthCubit.get(context).currentIndex],
             bottomNavigationBar: Container(
               height: KSize.getHeight(context, 95),
               decoration:const BoxDecoration(
@@ -67,11 +65,27 @@ class KBottomNavigationBar extends StatelessWidget {
             ),
           );
         }
-        else {
-          return Container(color: Colors.red,);
+        else if(states is OnLoginErrorState){
+          return Scaffold(
+            body:AlertDialog(
+              backgroundColor: Colors.white,
+              title:const Text("Error in Login"),
+
+              content: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pop();
+                },
+                child: Row(
+                  children: const[
+                    Spacer(),
+                    Text("Exit",style: TextStyle(color: Colors.red),),
+                  ],
+                ),
+              ),
+            ),
+          );
         }
-
-
+        return Scaffold(body:Center(child:CircularProgressIndicator()));
       },
     );
   }
@@ -79,7 +93,7 @@ class KBottomNavigationBar extends StatelessWidget {
   Widget _buildBottomNavItem(BuildContext context, String navIconImg, int navIndex) {
     return GestureDetector(
       onTap: () {
-        BottomNavigationBarCubit.get(context).setCurrentIndex(navIndex);
+        AuthCubit.get(context).setCurrentIndex(navIndex);
       },
       child: Container(
         color: Colors.transparent,
@@ -89,13 +103,13 @@ class KBottomNavigationBar extends StatelessWidget {
             SizedBox(height: KSize.getHeight(context, 10)),
             Image.asset(
               navIconImg,
-              color: BottomNavigationBarCubit.get(context).currentIndex == navIndex ? KColor.ultramarineBlue : KColor.dimGray,
+              color: AuthCubit.get(context).currentIndex == navIndex ? KColor.ultramarineBlue : KColor.dimGray,
               height: KSize.getHeight(context, 20.0),
               width: KSize.getWidth(context, 20.0),
             ),
             Image.asset(
               "assets/png/nv.png",
-              color: BottomNavigationBarCubit.get(context).currentIndex == navIndex ? KColor.ultramarineBlue : Colors.transparent,
+              color: AuthCubit.get(context).currentIndex == navIndex ? KColor.ultramarineBlue : Colors.transparent,
               width: KSize.getWidth(context, 93.38),
             )
           ],

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import '../../data/repository/Repository.dart';
+import '../../presentation/screens/ProfileScreen.dart';
+import '../../presentation/screens/home.dart';
 import '../task_states.dart';
 
 class AuthCubit extends Cubit<TaskStates>{
@@ -81,15 +85,39 @@ class AuthCubit extends Cubit<TaskStates>{
   }
   //....repositry.........
    login(){
+    emit(OnLoadingState());
     repository.login(emailControllerLogin.text.toString(),passwordControllerLogin.text.toString()).
     then((value){
-      print(77777);
-      emit(OnLoginedState());
-    }).catchError((e){
-      print(111);
-      emit(OnErrorState());
-    });
+      emit(OnLoginSuccessState());
+    }).catchError((catcError){
+      emit(OnLoginErrorState());
+    }
+
+    );
   }
+
+
+
+
+  int currentIndex = 0;
+
+  final List<Widget> bottomNavPages = [
+    HomeScreen(),
+    ProfileScreen(hideBackButton: true)
+  ];
+
+  setCurrentIndex(int navIndex){
+    currentIndex = navIndex;
+    if(currentIndex==0){
+
+    }
+    if(currentIndex==1){
+
+    }
+
+    emit(ChangeCurrentIndexState());
+  }
+
 
   static AuthCubit get(context)=>BlocProvider.of(context);
 

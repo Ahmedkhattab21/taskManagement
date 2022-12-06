@@ -9,8 +9,10 @@ class OnPasswordChangeState extends TaskStates{}
 
 class OnClearAbleChangeToTrueState extends TaskStates{}
 class OnClearAbleChangeToFalseState extends TaskStates{}
-class OnLoginedState extends TaskStates{}
-class OnErrorState extends TaskStates{}
+
+class OnLoadingState extends TaskStates{}
+class OnLoginSuccessState extends TaskStates{}
+class OnLoginErrorState extends TaskStates{}
 
 
 
