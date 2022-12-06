@@ -22,6 +22,25 @@ class WebServices{
       throw "error in login";
     }
   }
+  Future register(String name ,String email ,String pass,String phone)async{
+    String url =baseUrl+"/api/register";
+    final response= await http.post(
+        Uri.parse(url),
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: json.encode({
+          "name":name,
+          "email":email,
+          "password":pass,
+          "phone":phone
+        }));
+    if(response.statusCode==200){
+      return json.decode(response.body);
+    }else{
+      throw "error in Register";
+    }
+  }
   
 
 }

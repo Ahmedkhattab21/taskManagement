@@ -6,14 +6,12 @@ import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
-import '../../data/repository/Repository.dart';
-import '../../data/web_services/web_services.dart';
+
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
 
 
 class LogInPassword extends StatelessWidget {
-
 
   @override
   Widget build(BuildContext context) {

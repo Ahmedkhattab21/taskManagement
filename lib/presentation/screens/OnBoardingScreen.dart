@@ -83,6 +83,7 @@ class OnBoardingScreen extends StatelessWidget {
                                 TextSpan(
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
+                                        fromSign=false;
                                         Navigator.pushNamed(context, logInEmail);
                                       },
                                     text: " Sign in",

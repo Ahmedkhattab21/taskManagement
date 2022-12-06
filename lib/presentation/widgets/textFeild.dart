@@ -35,27 +35,63 @@ class KTextField extends StatelessWidget {
               style: KTextStyle.subtitle2.copyWith(color: KColor.slateGray)
           ),
           Form(
-            key:type=="mail"?AuthCubit.get(context).formKeyemail:AuthCubit.get(context).formKeypass,
+            key:type=="mail"?AuthCubit.get(context).formKeyemail:
+            type=="pass"?AuthCubit.get(context).formKeypass:
+            type=="mailup"?AuthCubit.get(context).formKeyemailUp:
+            type=="passup"?AuthCubit.get(context).formKeypassUp:
+            type=="name"?
+            AuthCubit.get(context).formKeyName:
+            type=="phone"?
+            AuthCubit.get(context).formKeyPhone:
+            null,
             child: TextFormField(
               key: Key("mail"),
               keyboardType:type=="mail"?TextInputType.emailAddress :
-              type=="pass"?TextInputType.visiblePassword:null,
+              type=="pass"?TextInputType.visiblePassword:
+              type=="mailup"?TextInputType.emailAddress :
+              type=="passup"?TextInputType.visiblePassword:
+              type=="name"?TextInputType.text:
+              type=="phone"?TextInputType.phone:
+              null,
               controller: controller,
-              obscureText: isPasswordField ? AuthCubit.get(context).obscureText : !AuthCubit.get(context).obscureText,
+              obscureText: isPasswordField ? AuthCubit.get(context).obscureText : false,
               onChanged: (value) {
                 type=="mail"?
-                AuthCubit.get(context).formKeyemail.currentState!.validate():AuthCubit.get(context).formKeypass.currentState!.validate();
-                if (!isPasswordField) {
-                  AuthCubit.get(context).isClearAbleTrue();
-                }
-                if(value.isEmpty){
+                AuthCubit.get(context).formKeyemail.currentState!.validate():
+                type=="pass"?
+                AuthCubit.get(context).formKeypass.currentState!.validate():
+                type=="mailup"?
+                AuthCubit.get(context).formKeyemailUp.currentState!.validate():
+                type=="passup"?
+                AuthCubit.get(context).formKeypassUp.currentState!.validate():
+                type=="name"?
+                AuthCubit.get(context).formKeyName.currentState!.validate():
+                type=="phone"?
+                AuthCubit.get(context).formKeyPhone.currentState!.validate()
+                :null;
+                if (isPasswordField) {
                   AuthCubit.get(context).isClearAbleFalse();
                 }
+                if (!isPasswordField) {
+                  if(value.isEmpty){
+                    AuthCubit.get(context).isClearAbleTrue();
+                  }
+                  else if(value.isNotEmpty){
+                    AuthCubit.get(context).isClearAbleFalse();
+                  }
+                }
+
 
               },
               validator:type=='mail'?(val)=> AuthCubit.get(context).validateEmail(val):
-                  type=="pass"?(val)=> AuthCubit.get(context).validatePassword(val):(val)=> AuthCubit.get(context).validateEmail(val),
+                  type=="pass"?(val)=> AuthCubit.get(context).validatePassword(val):
+                  type=='mailup'?(val)=> AuthCubit.get(context).validateEmail(val):
+                  type=="passup"?(val)=> AuthCubit.get(context).validatePassword(val):
+                  type=="name"? (val)=> AuthCubit.get(context).validateName(val):
+                  type=="phone"? (val)=> AuthCubit.get(context).validatePhone(val):
+                      null,
               decoration: InputDecoration(
+                prefixText: type=="phone"?"+20":null,
                   hintText: hintText==null? "" :hintText,
                   hintStyle:const TextStyle(fontFamily: 'Mulilsh'),
                   suffixIcon: isPasswordField
@@ -69,11 +105,11 @@ class KTextField extends StatelessWidget {
                       size: 16.0,
                     ),
                   )
-                      : AuthCubit.get(context).isClearAble
+                      : controller!.text.isNotEmpty
                       ? IconButton(
                       onPressed: () {
                         controller!.clear();
-                        AuthCubit.get(context).isClearAbleFalse();
+                        AuthCubit.get(context).isClearAbleTrue();
                       },
                       icon:const Icon(
                         Icons.cancel,

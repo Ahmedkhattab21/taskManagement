@@ -66,14 +66,14 @@ class KBottomNavigationBar extends StatelessWidget {
           );
         }
         else if(states is OnLoginErrorState){
+          String error=states.error;
           return Scaffold(
             body:AlertDialog(
               backgroundColor: Colors.white,
-              title:const Text("Error in Login"),
-
+              title: Text(error),
               content: GestureDetector(
                 onTap: (){
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamedAndRemoveUntil(onBoardingScreen, (Route<dynamic> route) => false);
                 },
                 child: Row(
                   children: const[
@@ -85,7 +85,7 @@ class KBottomNavigationBar extends StatelessWidget {
             ),
           );
         }
-        return Scaffold(body:Center(child:CircularProgressIndicator()));
+        return const Scaffold(body:Center(child:CircularProgressIndicator()));
       },
     );
   }

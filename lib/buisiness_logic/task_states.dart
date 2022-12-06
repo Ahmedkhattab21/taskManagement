@@ -12,7 +12,16 @@ class OnClearAbleChangeToFalseState extends TaskStates{}
 
 class OnLoadingState extends TaskStates{}
 class OnLoginSuccessState extends TaskStates{}
-class OnLoginErrorState extends TaskStates{}
+class OnLoginErrorState extends TaskStates{
+  String error;
+  OnLoginErrorState(this.error);
+}
+
+class OnRegisterSuccessState extends TaskStates{}
+class OnRegisterErrorState extends TaskStates{
+  String error;
+  OnRegisterErrorState(this.error);
+}
 
 
 

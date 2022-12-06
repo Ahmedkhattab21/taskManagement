@@ -18,12 +18,15 @@ class AuthCubit extends Cubit<TaskStates>{
   TextEditingController emailControllerLogin = TextEditingController();
   TextEditingController passwordControllerLogin = TextEditingController();
 
-  bool isClearAble = false;
+
+  bool isClearAble = true;
   bool obscureText = true;
 
 
   TextEditingController emailControllerUp = TextEditingController();
   TextEditingController passControllerUp = TextEditingController();
+  TextEditingController nameControllerUp = TextEditingController();
+  TextEditingController phoneControllerUp = TextEditingController();
 
 
 
@@ -67,6 +70,12 @@ class AuthCubit extends Cubit<TaskStates>{
   //...Validate and Auth......
   final GlobalKey<FormState> formKeyemail = GlobalKey();
   final GlobalKey<FormState> formKeypass = GlobalKey();
+  final GlobalKey<FormState> formKeyemailUp = GlobalKey();
+  final GlobalKey<FormState> formKeypassUp = GlobalKey();
+  final GlobalKey<FormState> formKeyName = GlobalKey();
+  final GlobalKey<FormState> formKeyPhone = GlobalKey();
+
+
 
 
   validateEmail(val) {
@@ -78,8 +87,21 @@ class AuthCubit extends Cubit<TaskStates>{
   }
 
   validatePassword(val) {
-    if (val!.isEmpty || val.length < 5) {
+    if (val!.isEmpty || val.length < 8) {
       return "Passworf is too short";
+    }
+    return null;
+  }
+  validateName(val) {
+    if (val!.isEmpty || val.length < 5) {
+      return "name must greater than 5";
+    }
+    return null;
+  }
+  validatePhone(val) {
+    int m=val.isEmpty?0:int.tryParse(val[0])??0;
+    if (val!.isEmpty || val.length !=10 || m !=1 ) {
+      return "Enter right number";
     }
     return null;
   }
@@ -90,7 +112,23 @@ class AuthCubit extends Cubit<TaskStates>{
     then((value){
       emit(OnLoginSuccessState());
     }).catchError((catcError){
-      emit(OnLoginErrorState());
+      emit(OnLoginErrorState(catcError.toString()));
+    }
+
+    );
+  }
+  register(){
+    emit(OnLoadingState());
+    repository.register(nameControllerUp.text.toString(),
+        emailControllerUp.text.toString(),
+        passControllerUp.text.toString(),
+        ("+20"+phoneControllerUp.text).toString()).
+    then((value){
+      print(value);
+      emit(OnRegisterSuccessState());
+    }).catchError((catcError){
+      print(catcError);
+      emit(OnRegisterErrorState(catcError.toString()));
     }
 
     );

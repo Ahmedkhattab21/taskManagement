@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wtasks/presentation/screens/loginScreen.dart';
 import '../../buisiness_logic/cuibits/AuthCubit.dart';
 import '../../buisiness_logic/task_states.dart';
 
@@ -7,6 +8,7 @@ import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../../constant/string.dart';
 import '../widgets/button.dart';
 import '../widgets/textFeild.dart';
 
@@ -83,15 +85,34 @@ class ProfileSetupScreen extends StatelessWidget {
                         }
                       )),
                       SizedBox(height: KSize.getHeight(context, 50)),
-                     KTextField(text: "First Name"),
+                     KTextField(
+                       text: "Name",
+                       type:"name",
+                       controller: AuthCubit.get(context).nameControllerUp,
+                     ),
                       SizedBox(height: KSize.getHeight(context, 30)),
-                      KTextField(text: "Last Name"),
+                      KTextField(
+                        text: "Phone",
+                        type:"phone",
+                        controller: AuthCubit.get(context).phoneControllerUp,
+                      ),
                       SizedBox(height: KSize.getHeight(context, 40)),
                       KButton(
                         title: "Continue",
                         onPressedCallback: () {
-                        //   Navigator.of(context)
-                        //       .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => KBottomNavigationBar()), (Route<dynamic> route) => false);
+                          if(!AuthCubit.get(context).formKeyName.currentState!.validate()){
+                            return ;
+                          }
+                          if(!AuthCubit.get(context).formKeyPhone.currentState!.validate()){
+                            return ;
+                          }
+                          AuthCubit.get(context).formKeyName.currentState!.save;
+                          AuthCubit.get(context).formKeyPhone.currentState!.save;
+                          FocusScope.of(context).unfocus();
+                          AuthCubit.get(context).register();
+                          fromSign=true;
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(logInEmail, (Route<dynamic> route) => false);
                         },
                       ),
                     ],

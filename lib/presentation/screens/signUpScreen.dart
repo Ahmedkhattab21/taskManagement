@@ -78,6 +78,7 @@ class SignUpScreen extends StatelessWidget {
                       controller: AuthCubit.get(context).emailControllerUp,
                       text: "YOUR EMAIL",
                       hintText: "Email",
+                      type: "mailup",
                     ),
                     SizedBox(height: KSize.getHeight(context, 30)),
                     KTextField(
@@ -85,11 +86,21 @@ class SignUpScreen extends StatelessWidget {
                       text: "YOUR PASSWORD",
                       isPasswordField: true,
                       hintText: "Password",
+                      type: "passup",
                     ),
                     SizedBox(height: KSize.getHeight(context, 40)),
                     KButton(
                       title: "Continue",
                       onPressedCallback: () {
+                        if(!AuthCubit.get(context).formKeyemailUp.currentState!.validate()){
+                          return ;
+                        }
+                        if(!AuthCubit.get(context).formKeypassUp.currentState!.validate()){
+                          return ;
+                        }
+                        AuthCubit.get(context).formKeyemail.currentState!.save;
+                        AuthCubit.get(context).formKeypassUp.currentState!.save;
+                        FocusScope.of(context).unfocus();
                         Navigator.pushNamed(context, profileSetup);
                       },
                     )
