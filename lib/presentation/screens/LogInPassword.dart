@@ -106,7 +106,6 @@ class LogInPassword extends StatelessWidget {
                         if(!AuthCubit.get(context).formKeypass.currentState!.validate()){
                           return ;
                         }
-                        // Navigator.pushReplacementNamed(context, bottomNavigationBar);
                         Navigator.of(context)
                             .pushNamedAndRemoveUntil(bottomNavigationBar, (Route<dynamic> route) => false);
                       },

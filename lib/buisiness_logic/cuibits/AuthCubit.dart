@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import '../../data/model/Login_model.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';

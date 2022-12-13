@@ -1,3 +1,4 @@
+import '../model/Login_model.dart';
 import '../web_services/web_services.dart';
 
 class Repository{
@@ -5,12 +6,10 @@ class Repository{
  late String taken;
 
   Repository(this.webServices);
-  Future login(String email ,String pass)async{
+  Future<LoginModel> login(String email ,String pass)async{
     try {
       Map<String,dynamic> user = await webServices.login(email, pass);
-      taken = user['authorisation']['token'];
-      print(taken);
-      return user;
+      return LoginModel.fromJson(user);
     }catch(e){
       throw "error in Login ";
     }

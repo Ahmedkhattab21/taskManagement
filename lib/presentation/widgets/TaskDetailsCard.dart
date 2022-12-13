@@ -101,7 +101,6 @@ class TaskDetailsCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 200,),
                     ],
                   ),
                 ),
