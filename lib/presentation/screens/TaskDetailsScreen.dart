@@ -2,17 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../buisiness_logic/cuibits/TaskDetailsCubit.dart';
 import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../../data/model/projects_model.dart';
 
 
 
 class TaskDetailsScreen extends StatelessWidget {
-
+  ProjectData projectData;
+  TaskDetailsScreen({required this.projectData});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class TaskDetailsScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               )),
-          title: Text("Task Details", style: KTextStyle.appBar),
+          title: Text("Project Details", style: KTextStyle.appBar),
           backgroundColor: KColor.white,
           elevation: 0,
           centerTitle: true,
@@ -47,50 +50,49 @@ class TaskDetailsScreen extends StatelessWidget {
                 SizedBox(height: KSize.getHeight(context, 29)),
                 //App Design
                 Text(
-                  "App Design",
+                  projectData.title,
                   style: KTextStyle.headline4.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 30.0,
                     height: 32 / 30,
                   ),
                 ),
-                SizedBox(height: KSize.getHeight(context, 13)),
-                Text("Task manager ui kit",
-                    style: KTextStyle.subtitle1.copyWith(
-                      color: KColor.dimGray,
-                      fontSize: 16.0,
-                      height: 18 / 16,
-                    )),
+
                 SizedBox(height: KSize.getHeight(context, 29)),
                 Row(
                   children: [
                     /// Assigned To
-                    Container(
+                    Expanded(
                       child: Row(
                         children: [
                           Container(
                             height: KSize.getHeight(context, 48),
                             width: KSize.getWidth(context, 48),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage("assets/png/Image1.png")),
+                            decoration:const BoxDecoration(
+                              image: DecorationImage(image: AssetImage("assets/png/pro1.png")),
                               shape: BoxShape.circle,
                             ),
                           ),
                           SizedBox(
                             width: KSize.getWidth(context, 11),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Assigned to",
-                                  style: KTextStyle.subtitle2.copyWith(
-                                      fontFamily: 'Popppins', color: KColor.dimGray, fontSize: 13, height: 15 / 13, fontWeight: FontWeight.normal)),
-                              SizedBox(
-                                height: KSize.getHeight(context, 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Assigned to",
+                                    style: KTextStyle.subtitle2.copyWith(
+                                        fontFamily: 'Popppins', color: KColor.dimGray, fontSize: 13, height: 15 / 13, fontWeight: FontWeight.normal)),
+                                SizedBox(
+                                  height: KSize.getHeight(context, 8),
+                                ),
+                                //"${projectData.users.map((e) => "${e.name }\n ffffccccccccccccc fffffffff ")}".substring(1).replaceAll(")","")
+                              Text("${projectData.users.map((e) => "${e.name }\n ")}".substring(1).replaceAll(")",""),
+                                   overflow: TextOverflow.fade, //new
+                                   style: KTextStyle.subtitle1.copyWith(fontFamily: 'Popppins', height: 18 / 16, fontWeight: FontWeight.w600)
                               ),
-                              Text("Adom Shafi",
-                                  style: KTextStyle.subtitle1.copyWith(fontFamily: 'Popppins', height: 18 / 16, fontWeight: FontWeight.w600)),
-                            ],
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -99,13 +101,13 @@ class TaskDetailsScreen extends StatelessWidget {
                     SizedBox(width: KSize.getWidth(context, 25)),
 
                     /// Deadline
-                    Container(
+                    Expanded(
                       child: Row(
                         children: [
                           Container(
                             height: KSize.getHeight(context, 48),
                             width: KSize.getWidth(context, 48),
-                            decoration: BoxDecoration(
+                            decoration:const BoxDecoration(
                               shape: BoxShape.circle,
                               color: KColor.ultramarineBlue,
                             ),
@@ -119,28 +121,33 @@ class TaskDetailsScreen extends StatelessWidget {
                           SizedBox(
                             width: KSize.getWidth(context, 11),
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Due date",
-                                  style: KTextStyle.subtitle2.copyWith(
-                                      fontFamily: 'Popppins', color: KColor.dimGray, fontSize: 13, height: 15 / 13, fontWeight: FontWeight.normal)),
-                              SizedBox(
-                                height: KSize.getHeight(context, 8),
-                              ),
-                              Text("May 20",
-                                  style: KTextStyle.subtitle1.copyWith(fontFamily: 'Popppins', height: 18 / 16, fontWeight: FontWeight.w600)),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Due date",
+                                    style: KTextStyle.subtitle2.copyWith(
+                                        fontFamily: 'Popppins', color: KColor.dimGray, fontSize: 13, height: 15 / 13, fontWeight: FontWeight.normal)),
+                                SizedBox(
+                                  height: KSize.getHeight(context, 8),
+                                ),
+                                Text(DateFormat.MMMd().format(projectData.end),
+                                    style: KTextStyle.subtitle1.copyWith(fontFamily: 'Popppins', height: 18 / 16, fontWeight: FontWeight.w600)),
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    )
+                    ),
+
+                    SizedBox(width: KSize.getWidth(context, 25)),
+
                   ],
                 ),
                 SizedBox(height: KSize.getHeight(context, 29)),
                 Text("Description", style: KTextStyle.headline6.copyWith(fontSize: 18, height: 20 / 18)),
                 SizedBox(height: KSize.getHeight(context, 5)),
-                Text("Task manager app ui kit must be uniqe and trendy. In this app we need every features and section about task manager.",
+                Text(projectData.description,
                     style: KTextStyle.subtitle1.copyWith(color: KColor.dimGray, fontSize: 14, height: 24 / 14)),
                 SizedBox(height: KSize.getHeight(context, 29)),
                 Text("Team Member", style: KTextStyle.headline6.copyWith(fontSize: 18, height: 20 / 18)),
@@ -220,36 +227,13 @@ class TaskDetailsScreen extends StatelessWidget {
                                     image: DecorationImage(image: AssetImage('assets/png/Image1.png'))),
                               ),
                             ),
-                            Positioned(
-                              left: KSize.getWidth(context, 113.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => SelectMemberScreen()),
-                                  // );
-                                },
-                                child: Container(
-                                    height: KSize.getHeight(context, 38.54),
-                                    width: KSize.getWidth(context, 38.54),
-                                    decoration: BoxDecoration(
-                                      color: KColor.ultramarineBlue,
-                                      border: Border.all(
-                                        color: Color(0xFFFFFFFF),
-                                        width: 1,
-                                      ),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Center(child: Image.asset("assets/png/plus.png"))),
-                              ),
-                            ),
                           ],
                         )),
                     CircularPercentIndicator(
                       radius: 50.0,
                       lineWidth: 4.0,
                       percent: 0.5,
-                      center: Text("55%", style: TextStyle(color: KColor.ultramarineBlue)),
+                      center: Text(projectData.users.length.toString(), style: TextStyle(color: KColor.ultramarineBlue)),
                       backgroundColor: KColor.lightGray,
                       progressColor: KColor.ultramarineBlue,
                     ),

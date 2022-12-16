@@ -20,8 +20,37 @@ class KBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,TaskStates>(
       listener: (context,states){},
-      builder:(context,states) {
-        if(states is OnLoginSuccessState){
+      builder:(context,states){
+        if(states is OnLoadingState){
+          return  const Scaffold(
+              body: Center(child:CircularProgressIndicator()));
+        }
+        else if(states is OnLoginErrorState){
+          String error=states.error;
+          return Scaffold(
+            body:AlertDialog(
+              backgroundColor: Colors.white,
+              title: Text(error),
+              content: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pushNamedAndRemoveUntil(onBoardingScreen, (Route<dynamic> route) => false);
+                },
+                child: Row(
+                  children: const[
+                    Spacer(),
+                    Text("Exit",style: TextStyle(color: Colors.red),),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        else {
+           if (states is OnLoginSuccessState){
+             AuthCubit.get(context).emailController.clear();
+             AuthCubit.get(context).passwordControllerLogin.clear();
+             AuthCubit.get(context).currentIndexEqualZero();
+          }
           return Scaffold(
             backgroundColor: Colors.white,
             body: AuthCubit.get(context).bottomNavPages[AuthCubit.get(context).currentIndex],
@@ -65,34 +94,13 @@ class KBottomNavigationBar extends StatelessWidget {
             ),
           );
         }
-        else if(states is OnLoginErrorState){
-          String error=states.error;
-          return Scaffold(
-            body:AlertDialog(
-              backgroundColor: Colors.white,
-              title: Text(error),
-              content: GestureDetector(
-                onTap: (){
-                  Navigator.of(context).pushNamedAndRemoveUntil(onBoardingScreen, (Route<dynamic> route) => false);
-                },
-                child: Row(
-                  children: const[
-                    Spacer(),
-                    Text("Exit",style: TextStyle(color: Colors.red),),
-                  ],
-                ),
-              ),
-            ),
-          );
-        }
-        return const Scaffold(body:Center(child:CircularProgressIndicator()));
       },
     );
   }
 
   Widget _buildBottomNavItem(BuildContext context, String navIconImg, int navIndex) {
     return GestureDetector(
-      onTap: () {
+      onTap: (){
         AuthCubit.get(context).setCurrentIndex(navIndex);
       },
       child: Container(

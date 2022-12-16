@@ -15,6 +15,7 @@ import 'package:wtasks/presentation/screens/signUpScreen.dart';
 import 'package:wtasks/presentation/screens/profileSetupScreen.dart';
 import 'package:wtasks/presentation/widgets/KBottomNavigationBar.dart';
 
+import 'buisiness_logic/bloc_observer.dart';
 import 'buisiness_logic/cuibits/AuthCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
 import 'buisiness_logic/cuibits/TaskDetailsCubit.dart';
@@ -22,11 +23,15 @@ import 'buisiness_logic/task_states.dart';
 import 'constant/string.dart';
 import 'data/repository/Repository.dart';
 import 'data/web_services/web_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  Bloc.observer = MyBlocObserver();
+
 
   runApp( TaskManagement( repository : Repository(WebServices())));
 }
@@ -68,13 +73,11 @@ class TaskManagement extends StatelessWidget {
             signUp:(_)=>SignUpScreen(),
             profileSetup:(_)=>ProfileSetupScreen(),
             bottomNavigationBar:(_)=>KBottomNavigationBar(),
-            taskDetailsScreen:(_)=>TaskDetailsScreen(),
             createTaskScreen:(_)=>CreateTaskScreen(),
             createProjectScreen:(_)=>CreateProjectScreen(),
             createTeamScreen:(_)=>CreateTeamScreen(),
             selectMemberScreen:(_)=>SelectMemberScreen(),
             profileScreen:(_)=>ProfileScreen(),
-            editProfileScreen:(_)=>EditProfileScreen(),
 
           },
         );

@@ -4,10 +4,14 @@ import 'package:vector_math/vector_math.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
+import '../../data/model/projects_model.dart';
+import '../screens/TaskDetailsScreen.dart';
 
 class TaskDetailsCard extends StatelessWidget {
-  const TaskDetailsCard({
+  ProjectData projectData;
+   TaskDetailsCard({
     Key? key,
+    required this.projectData
   }) : super(key: key);
 
   @override
@@ -24,7 +28,7 @@ class TaskDetailsCard extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.all(30),
+          padding:const EdgeInsets.all(30),
           height: KSize.getHeight(context, 200),
           width: KSize.getWidth(context, 327),
           decoration: BoxDecoration(color: KColor.ultramarineBlue, borderRadius: BorderRadius.circular(30)),
@@ -37,41 +41,31 @@ class TaskDetailsCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("App Design",
+                      Text(projectData.title,
                           style: KTextStyle.headline4.copyWith(color: KColor.white, fontSize: 26.0, fontWeight: FontWeight.bold, height: 28 / 26)),
-                      SizedBox(height: KSize.getHeight(context, 8)),
-                      Text("Task manager ui kit", style: KTextStyle.subtitle2.copyWith(color: KColor.periwinkleCrayola, height: 16 / 14)),
                       SizedBox(height: KSize.getHeight(context, 24)),
-                      GestureDetector(
-                        // onLongPressEnd: (LongPressEndDetails){
-                        //   print(LongPressEndDetails.localPosition.dx);
-                        // },
-                        // onHorizontalDragUpdate: (details) async {
-                        //
-                        //   // Note: Sensitivity is integer used when you don't want to mess up vertical drag
-                        //   int sensitivity = 8;
-                        //   if (details.delta.dx > sensitivity) {
-                        //     // Right Swipe
-                        //     print('right swipe -- ');
-                        //     // Navigator.push(
-                        //     //   context,
-                        //     //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
-                        //     // );
-                        //     print(details.delta.dx);
-                        //     print(sensitivity);
-                        //   } else if (details.delta.dx < -sensitivity) {
-                        //     //Left Swipe
-                        //     print('left swipe -- ');
-                        //     print(details.delta.dx);
-                        //
-                        //   }
-                        // },
-                        onTap: () {
+                      Text("${projectData.teams.length} Teams , ${projectData.users.length} Users",
+                          style: KTextStyle.caption.copyWith(
+                            color: KColor.cultured1,
+                            fontSize: 11.0,
+                          )),
+                      SizedBox(height: KSize.getHeight(context, 24)),
 
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => TaskDetailsScreen()),
-                          // );
+                      GestureDetector(
+                        onHorizontalDragUpdate: (details) async {
+                          int sensitivity = 8;
+                          if (details.delta.dx > sensitivity) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => TaskDetailsScreen(projectData: projectData,)),
+                            );
+                          }
+                        },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TaskDetailsScreen(projectData: projectData,)),
+                          );
                         },
                         child: Container(
                           width: KSize.getWidth(context, 100),
@@ -83,7 +77,7 @@ class TaskDetailsCard extends StatelessWidget {
                               Container(
                                 width: KSize.getWidth(context, 38),
                                 height: KSize.getHeight(context, 38),
-                                decoration: BoxDecoration(color: KColor.white, shape: BoxShape.circle),
+                                decoration:const BoxDecoration(color: KColor.white, shape: BoxShape.circle),
                                 child: Center(
                                   child: Image.asset(
                                     "assets/png/Arrow - Down 2.png",
@@ -93,7 +87,7 @@ class TaskDetailsCard extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                  padding: EdgeInsets.only(right: 15),
+                                  padding: const EdgeInsets.only(right: 15),
                                   child: Text("Details",
                                       style: KTextStyle.subtitle2
                                           .copyWith(color: KColor.white, fontSize: 12, fontWeight: FontWeight.normal, height: 14 / 12)))
@@ -115,39 +109,31 @@ class TaskDetailsCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12.5, vertical: 10),
+                  padding:const EdgeInsets.symmetric(horizontal: 12.5, vertical: 10),
                   height: KSize.getHeight(context, 129),
                   width: KSize.getWidth(context, 50.0),
                   decoration: BoxDecoration(color: KColor.white, borderRadius: BorderRadius.circular(20)),
-                  child: Stack(
+                  child:Stack(
                     children: [
                       Container(
                         height: KSize.getHeight(context, 25.0),
                         width: KSize.getWidth(context, 25.0),
-                        decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img2.png'))),
+                        decoration:const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img2.png'))),
                       ),
                       Positioned(
-                        top: KSize.getHeight(context, 15),
+                        top: KSize.getHeight(context, 20),
                         child: Container(
                           height: KSize.getHeight(context, 25.0),
                           width: KSize.getWidth(context, 25.0),
-                          decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img21.png'))),
+                          decoration:const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/pro1.png'))),
                         ),
                       ),
                       Positioned(
-                        top: KSize.getHeight(context, 30),
+                        top: KSize.getHeight(context, 40),
                         child: Container(
                           height: KSize.getHeight(context, 25.0),
                           width: KSize.getWidth(context, 25.0),
-                          decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img41.png'))),
-                        ),
-                      ),
-                      Positioned(
-                        top: KSize.getHeight(context, 45),
-                        child: Container(
-                          height: KSize.getHeight(context, 25.0),
-                          width: KSize.getWidth(context, 25.0),
-                          decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img44.png'))),
+                          decoration: const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img41.png'))),
                         ),
                       ),
                       Positioned(
@@ -155,15 +141,15 @@ class TaskDetailsCard extends StatelessWidget {
                         child: Container(
                           height: KSize.getHeight(context, 25.0),
                           width: KSize.getWidth(context, 25.0),
-                          decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img9.png'))),
+                          decoration: const BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: AssetImage('assets/png/img44.png'))),
                         ),
                       ),
                       Positioned(
-                        top: KSize.getHeight(context, 75),
+                        top: KSize.getHeight(context, 80),
                         child: Container(
                             height: KSize.getHeight(context, 25.0),
                             width: KSize.getWidth(context, 25.0),
-                            decoration: BoxDecoration(color: KColor.ultramarineBlue, shape: BoxShape.circle),
+                            decoration:const BoxDecoration(color: KColor.ultramarineBlue, shape: BoxShape.circle),
                             child: Center(
                                 child: Image.asset(
                                   "assets/png/plus.png",

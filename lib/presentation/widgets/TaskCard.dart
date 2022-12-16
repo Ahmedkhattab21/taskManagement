@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wtasks/buisiness_logic/cuibits/AuthCubit.dart';
 
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
+import '../../data/model/projects_model.dart';
+import '../../data/repository/Repository.dart';
+import '../../data/web_services/web_services.dart';
+import '../screens/TaskDetailsScreen.dart';
 
 
 class TaskCard extends StatelessWidget {
-  final String taskTitle;
-  final String taskSubTitle;
-  final int numberOfParticipants;
-  final int taskProgress;
+  ProjectData projectData;
 
-  const TaskCard({
+   TaskCard({
     Key? key,
-    required this.taskTitle,
-    required this.taskSubTitle,
-   required this.numberOfParticipants,
-    required this.taskProgress,
+    required this.projectData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, taskDetailsScreen);
+      onTap: ()async {
+        Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TaskDetailsScreen(projectData: projectData,)),
+
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: KSize.getHeight(context, 16.0)),
@@ -39,9 +42,9 @@ class TaskCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: KSize.getHeight(context, 18.0), bottom: KSize.getHeight(context, 5.0)),
-                  child: Text(taskTitle, style: KTextStyle.headline6),
+                  child: Text(projectData.title, style: KTextStyle.headline6),
                 ),
-                Text(taskSubTitle,
+                Text("${projectData.teams.length} Teams ",
                     style: KTextStyle.caption.copyWith(
                       color: KColor.dimGray,
                       fontSize: 11.0,
@@ -92,40 +95,12 @@ class TaskCard extends StatelessWidget {
                                   image:const DecorationImage(image: AssetImage('assets/png/img44.png'))),
                             ),
                           ),
-                          Positioned(
-                            left: KSize.getWidth(context, 43.5),
-                            child: Container(
-                                height: KSize.getHeight(context, 19.93),
-                                width: KSize.getWidth(context, 19.93),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: KColor.white,
-                                    width: 1,
-                                  ),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(child: Image.asset("assets/png/img41.png"))),
-                          ),
-                          Positioned(
-                            left: KSize.getWidth(context, 58),
-                            child: Container(
-                              height: KSize.getHeight(context, 19.93),
-                              width: KSize.getWidth(context, 19.93),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: KColor.white,
-                                    width: 1,
-                                  ),
-                                  shape: BoxShape.circle,
-                                  image:const DecorationImage(image: AssetImage('assets/png/Image1.png'))),
-                            ),
-                          ),
                         ],
                       ),
                       SizedBox(
                         width: KSize.getWidth(context, 70),
                       ),
-                      Text("$numberOfParticipants participants",
+                      Text("${projectData.users.length} participants",
                           style: KTextStyle.caption.copyWith(
                             color: KColor.dimGray,
                             fontSize: 11.0,
@@ -139,8 +114,8 @@ class TaskCard extends StatelessWidget {
               child: CircularPercentIndicator(
                 radius: 50.0,
                 lineWidth: 4.0,
-                percent: taskProgress / 100,
-                center: Text("$taskProgress%", style:const TextStyle(color: KColor.ultramarineBlue)),
+                percent: projectData.users.length / 100,
+                center: Text("${projectData.users.length}", style:const TextStyle(color: KColor.ultramarineBlue)),
                 backgroundColor: KColor.lightGray,
                 progressColor: KColor.ultramarineBlue,
               ),

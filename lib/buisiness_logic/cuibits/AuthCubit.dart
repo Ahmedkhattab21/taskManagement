@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/Login_model.dart';
+import '../../data/model/projects_model.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';
@@ -106,11 +108,14 @@ class AuthCubit extends Cubit<TaskStates>{
     }
     return null;
   }
-  //....repositry.........
-   login(){
+  //.... data .........
+   login()async{
     emit(OnLoadingState());
     repository.login(emailControllerLogin.text.toString(),passwordControllerLogin.text.toString()).
-    then((value){
+    then((value)async{
+      final prefs = await SharedPreferences.getInstance();
+       prefs.setString('token',value.authorisation.token);
+      print( value.authorisation.token);
       emit(OnLoginSuccessState());
     }).catchError((catcError){
       emit(OnLoginErrorState(catcError.toString()));
@@ -136,6 +141,8 @@ class AuthCubit extends Cubit<TaskStates>{
   }
 
 
+//.....................home.............
+
 
 
   int currentIndex = 0;
@@ -144,17 +151,61 @@ class AuthCubit extends Cubit<TaskStates>{
     HomeScreen(),
     ProfileScreen(hideBackButton: true)
   ];
+  currentIndexEqualZero()async{
+    currentIndex=0;
+    await getAllProjects();
+  }
 
-  setCurrentIndex(int navIndex){
+  setCurrentIndex(int navIndex)async{
+    emit(OnHomeLoadingState());
     currentIndex = navIndex;
     if(currentIndex==0){
-
+      await getAllProjects();
     }
     if(currentIndex==1){
-
+      await getProfile();
     }
+  }
 
-    emit(ChangeCurrentIndexState());
+
+  getAllProjects()async{
+   await repository.getAllProjects().then((value) {
+      if(value.isEmpty){
+        emit(OnEmptyProjectsState());
+        return ;
+      }
+      print(value);
+      emit(OnGetProjectsSuccessState(value));
+
+    }).catchError((error){
+      emit(OnGetProjectsErrorState(error));
+    });
+
+  }
+
+
+//........profile.......
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+
+  getProfile()async{
+    await repository.getProfile().then((value) {
+      emit(OnGetProfileState(value));
+    }).catchError((error){
+      emit(OnGetProfileErrorState(error));
+    });
+
+  }
+
+  logout()async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    emailControllerLogin.clear();
+    passwordControllerLogin.clear();
+    emit(LogOutState());
+
   }
 
 
