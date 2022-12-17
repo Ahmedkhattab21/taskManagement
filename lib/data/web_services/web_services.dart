@@ -84,7 +84,73 @@ class WebServices{
     }
 
   }
+  Future editProfile(String email ,String name, String phone)async {
+    final prefs = await SharedPreferences.getInstance();
+    if( !prefs.containsKey('token')){
+      throw "error in get token";
+    }
+    String? token= prefs.getString('token');
+    String url =baseUrl+"/api/profile/update";
+    final response= await http.post(
+        Uri.parse(url),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Bearer $token",
+        },
+        body: json.encode({
+          "name":name,
+          "email":email,
+          "phone":phone
+        }));
+    if(response.statusCode==200){
+      return json.decode(response.body);
+    }else{
+      throw "error in login";
+    }
+  }
+  Future getUsers()async{
+    final prefs = await SharedPreferences.getInstance();
+    if( !prefs.containsKey('token')){
+      throw "error in get token";
+    }
+    String? token= prefs.getString('token');
+    String url =baseUrl+"/api/team/users";
+    final response= await http.get(
+      Uri.parse(url),
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer $token",
+      },);
+    if(response.statusCode==200){
+      return json.decode(response.body);
+    }else{
+      throw "error in getUsers";
+    }
+  }
 
+  Future createTeam(String title, List members)async{
+    final prefs = await SharedPreferences.getInstance();
+    if( !prefs.containsKey('token')){
+      throw "error in get token";
+    }
+    String? token= prefs.getString('token');
+    String url =baseUrl+"/api/team/add";
+    final response= await http.post(
+      Uri.parse(url),
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer $token",
+      },
+      body:  json.encode({
+        "title":title,
+        "members":members
+      }));
+    if(response.statusCode==200){
+      return json.decode(response.body);
+    }else{
+      throw "error in create Team";
+    }
+  }
 
 
 }

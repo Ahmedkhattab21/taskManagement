@@ -1,6 +1,9 @@
 import '../model/Login_model.dart';
+import '../model/createTeam_model.dart';
+import '../model/edit_profile.dart'as e ;
 import '../model/profile_model.dart' as Profile;
 import '../model/projects_model.dart';
+import '../model/users_model.dart'as u;
 import '../web_services/web_services.dart';
 
 class Repository{
@@ -41,7 +44,30 @@ class Repository{
       throw "error in getProfile";
     }
   }
-
+  Future<e.Data> editProfile(String email ,String name, String phone)async {
+    try{
+      Map<String,dynamic> myData=await webServices.editProfile(email, name, phone);
+      return e.EditProfile.fromJson(myData).data;
+    }catch(e){
+      throw "error in EditProfile";
+    }
+  }
+  Future<List<u.User>> getUsers()async{
+    try{
+      Map<String,dynamic> users=await webServices.getUsers();
+      return  u.UsersModel.fromJson(users).data.users;
+    }catch(e){
+      throw "error in GetUsers";
+    }
+  }
+  Future<CreateTeamModel> createTeam(String title, List members)async{
+    try{
+      Map<String,dynamic> teamAdded=await webServices.createTeam(title, members);
+      return CreateTeamModel.fromJson(teamAdded);
+    }catch(e){
+      throw "error in create team";
+    }
+  }
 
 
 

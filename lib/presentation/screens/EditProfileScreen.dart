@@ -16,7 +16,6 @@ class EditProfileScreen extends StatelessWidget {
   Data data;
   EditProfileScreen({required this.data});
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,TaskStates>(
@@ -36,6 +35,18 @@ class EditProfileScreen extends StatelessWidget {
                 ),
                 onTap: () {
                   ///
+                  if(!AuthCubit.get(context).formKeyName.currentState!.validate()){
+                    return ;
+                  }
+                  if(!AuthCubit.get(context).formKeyemail.currentState!.validate()){
+                    return ;
+                  }
+                  if(!AuthCubit.get(context).formKeyPhone.currentState!.validate()){
+                    return ;
+                  }
+                  AuthCubit.get(context).currentIndex==0?
+                  AuthCubit.get(context).currentIndexEqualEditZero() :
+                  AuthCubit.get(context).currentIndexEqualOne();
                   Navigator.pop(context);
                 },
               )),

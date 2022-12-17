@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<TaskStates>{
       return null;
     }
     pikedImage=File(photo.path!);
-    emit(GetImageFromCameraState());
+    // emit(GetImageFromCameraState());
   }
 
    galleyImage() async {
@@ -52,7 +52,7 @@ class AuthCubit extends Cubit<TaskStates>{
       return null;
     }
     pikedImage=File(photo.path!);
-    emit(GetImageFromGalaryState());
+    // emit(GetImageFromGalaryState());
   }
 
 
@@ -155,6 +155,17 @@ class AuthCubit extends Cubit<TaskStates>{
     currentIndex=0;
     await getAllProjects();
   }
+  currentIndexEqualEditZero()async{
+    currentIndex=0;
+    await editProfile();
+    await getProfile();
+  }
+  currentIndexEqualOne()async{
+    currentIndex=1;
+    await editProfile();
+    await getProfile();
+  }
+
 
   setCurrentIndex(int navIndex)async{
     emit(OnHomeLoadingState());
@@ -174,7 +185,6 @@ class AuthCubit extends Cubit<TaskStates>{
         emit(OnEmptyProjectsState());
         return ;
       }
-      print(value);
       emit(OnGetProjectsSuccessState(value));
 
     }).catchError((error){
@@ -207,6 +217,75 @@ class AuthCubit extends Cubit<TaskStates>{
     emit(LogOutState());
 
   }
+  editProfile()async{
+    emit(OnEditProfileLoadingState());
+    await repository.editProfile(emailController.text.toString(),
+         nameController.text.toString(),
+         "+20"+phoneController.text.toString()).
+     then((value)async{
+       emit(OnEditProfileSuccessState());
+     }).catchError((error){
+       emit(OnEditProfileErrorState());
+     });
+  }
+//............users.......
+
+  TextEditingController teamNameController=TextEditingController();
+  late List<Map> selectMemberModel =[];
+     // {"index":0, 'isSelect': false},
+
+
+
+  changeIconOnTap(index,id)async{
+    selectMemberModel[index]['isSelect'] = !selectMemberModel[index]['isSelect'];
+    selectMemberModel[index]['id'] = id;
+    emit(ChangeIconIndexState());
+    await getUsers();
+  }
+
+  getUsers()async{
+    emit(OnGetUserLoadingState());
+    await repository.getUsers().
+    then((value)async{
+      if(selectMemberModel.isEmpty||selectMemberModel.length != value.length){
+        selectMemberModel=[];
+        for(var i in value){
+          selectMemberModel.add({"id":i.id,"isSelect":false,});
+        }
+        print(selectMemberModel);
+      }else if(selectMemberModel.length == value.length){
+      }
+
+
+      emit(OnGetUsersSuccessState(value));
+    }).catchError((error){
+      emit(OnGetUsersErrorState(error));
+    });
+  }
+
+//...........
+
+  // List<String> dropDownItem = ['Anyone Can Join', 'B', 'C', 'D'];
+  // String _selectedOption= "Anyone Can Join";
+
+  createTeam()async{
+    List elements=[];
+    selectMemberModel.forEach((element) {
+      if(element['isSelect']){
+        elements.add(element['id']);
+      }
+    });
+   await repository.createTeam(teamNameController.text, elements).then((value)async {
+       // await currentIndexEqualZero();
+     emit(OnCreateTeamSuccessState());
+    } ).catchError((error){
+      emit(OnCreateTeamErrorState());
+    });
+    await currentIndexEqualZero();
+
+  }
+
+
 
 
   static AuthCubit get(context)=>BlocProvider.of(context);

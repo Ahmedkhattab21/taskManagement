@@ -32,11 +32,9 @@ class ProfileScreen extends StatelessWidget {
             ),
           );
         }
-        else{
-
-          Data data=states is OnGetProfileState? states.data:Data(id: 0, name: "Name", email: "Email", emailVerifiedAt: "", createdAt: DateTime.now(), updatedAt: DateTime.now(), phone: "", googleId: "");
-
-          return Scaffold(
+        else if(states is OnGetProfileState){
+          Data data=states.data;
+         return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: KColor.white,
             appBar: AppBar(
@@ -60,7 +58,6 @@ class ProfileScreen extends StatelessWidget {
               elevation: 0,
               centerTitle: true,
             ),
-            //KAppbar(title: "Profile", hideBackButton: hideBackButton),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +152,7 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {
                             AuthCubit.get(context).nameController.text=data.name;
                             AuthCubit.get(context).emailController.text=data.email;
-                            AuthCubit.get(context).phoneController.text=data.phone;
+                            AuthCubit.get(context).phoneController.text=data.phone.toString().substring(3);
 
                             Navigator.push(
                               context,
@@ -191,8 +188,12 @@ class ProfileScreen extends StatelessWidget {
             ),
           );
         }
+        else{
+          return   const Scaffold(
+          body: Center(child:CircularProgressIndicator()));
+        }
+      }
 
-      },
     );
   }
 }

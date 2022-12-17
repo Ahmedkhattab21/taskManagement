@@ -1,4 +1,5 @@
 import '../data/model/profile_model.dart' as profile;
+import '../data/model/users_model.dart'as u;
 
 import '../data/model/projects_model.dart';
 
@@ -45,10 +46,25 @@ class OnGetProfileErrorState extends TaskStates{
   String error;
   OnGetProfileErrorState(this.error);
 }
+class OnEditProfileLoadingState extends TaskStates{}
+class OnEditProfileSuccessState extends TaskStates{}
+class OnEditProfileErrorState extends TaskStates{}
+
+class OnGetUsersSuccessState extends TaskStates{
+  List<u.User> users;
+  OnGetUsersSuccessState(this.users);
+}
+class OnGetUsersErrorState extends TaskStates{
+  String error;
+  OnGetUsersErrorState(this.error);
+}
+class ChangeIconIndexState extends TaskStates{}
+class OnGetUserLoadingState extends TaskStates{}
 
 
-class GetImageFromCameraState extends TaskStates{}
-class GetImageFromGalaryState extends TaskStates{}
+class OnCreateTeamSuccessState extends TaskStates{}
+class OnCreateTeamErrorState extends TaskStates{}
+
 
 class ChangeCurrentIndexState extends TaskStates{}
 

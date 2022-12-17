@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
         loaderColor: KColor.ultramarineBlue,
         backgroundColor:KColor.white,
         showLoader: true,
-        durationInSeconds: 2,
+        durationInSeconds: 1,
         navigator: const WelcomeScreen(),
       ),
     );

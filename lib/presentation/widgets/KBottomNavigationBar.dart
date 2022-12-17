@@ -51,7 +51,7 @@ class KBottomNavigationBar extends StatelessWidget {
              AuthCubit.get(context).passwordControllerLogin.clear();
              AuthCubit.get(context).currentIndexEqualZero();
           }
-          return Scaffold(
+           return Scaffold(
             backgroundColor: Colors.white,
             body: AuthCubit.get(context).bottomNavPages[AuthCubit.get(context).currentIndex],
             bottomNavigationBar: Container(

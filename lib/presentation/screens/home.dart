@@ -26,20 +26,29 @@ class HomeScreen extends StatelessWidget {
           return  const Scaffold(
               body: Center(child:CircularProgressIndicator()));
         }
-        ///still
         else if(states is OnEmptyProjectsState){
-          return Scaffold();
+          return const Scaffold(
+              body:Center(child: Text("Empty Data"))
+          );
         }
-        ///still
         else if(states is OnGetProjectsErrorState){
           String error=states.error;
-          return Scaffold();
+          return const Scaffold(
+              body:Center(child: Text("Error inn get data"))
+          );
+        }
+        else if(states is OnCreateTeamErrorState){
+          return const Scaffold(
+            body: Center(child: Text("Element is found")),
+          );
         }
         else{
           List<ProjectData> myProjects=states is OnGetProjectsSuccessState? states.projects:[];
 
           if(myProjects.isEmpty){
-            return Scaffold();
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
           }
           else{
             myProjects.sort((a,b)=> b.createdAt.compareTo(a.createdAt));
