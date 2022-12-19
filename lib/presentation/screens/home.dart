@@ -78,11 +78,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   onTap: () async{
 
-                    Repository(WebServices()).createProject("Waqty22", "12-11-2023" ,
-                       " ipsum dolor sit amet ",mm.Member(teams:[1],users:[1]));
-                   // await AuthCubit.get(context).getProfile();
-                   //  Navigator.pushNamed(
-                   //      context, profileScreen);
+                   await AuthCubit.get(context).getProfile();
+                    Navigator.pushNamed(
+                        context, profileScreen);
                   },
                 ),
               ),

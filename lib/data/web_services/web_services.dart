@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:wtasks/constant/string.dart';
-import 'package:wtasks/data/model/createProjReqest_model.dart';
+import 'package:wtasks/data/model/createProjReqest_model.dart'as cr;
+
 
 class WebServices{
   Future login(String email ,String pass)async{
@@ -152,7 +153,7 @@ class WebServices{
       throw "error in create Team";
     }
   }
-  Future createProject(String title,String dueDate, String description,Member members)async{
+  Future createProject(String title,String dueDate, String description,cr.Member members)async{
     final prefs = await SharedPreferences.getInstance();
     if( !prefs.containsKey('token')){
       throw "error in get token";
@@ -177,5 +178,6 @@ class WebServices{
       throw "error in create Project";
     }
   }
+
 
 }

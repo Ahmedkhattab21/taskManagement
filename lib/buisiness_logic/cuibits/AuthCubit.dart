@@ -10,7 +10,6 @@ import 'package:wtasks/data/model/createProjReqest_model.dart' as mm;
 import 'package:intl/intl.dart';
 
 
-import '../../data/model/projects_model.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';
@@ -34,28 +33,28 @@ class AuthCubit extends Cubit<TaskStates>{
   TextEditingController phoneControllerUp = TextEditingController();
 
 
+  //
+  // ImagePicker picker = ImagePicker();
+  // File? pikedImage;
+  //
+  //  getImage() async {
+  //
+  //    XFile?  photo = await picker.pickImage(source: ImageSource.camera);
+  //   if(photo ==null){
+  //     return null;
+  //   }
+  //   pikedImage=File(photo.path!);
+  //   emit(GetImageFromCameraState());
+  // }
 
-  ImagePicker picker = ImagePicker();
-  File? pikedImage;
-
-   getImage() async {
-
-     XFile?  photo = await picker.pickImage(source: ImageSource.camera);
-    if(photo ==null){
-      return null;
-    }
-    pikedImage=File(photo.path!);
-    // emit(GetImageFromCameraState());
-  }
-
-   galleyImage() async {
-     XFile? photo = await picker.pickImage(source: ImageSource.gallery);
-    if(photo ==null){
-      return null;
-    }
-    pikedImage=File(photo.path!);
-    // emit(GetImageFromGalaryState());
-  }
+  //  galleyImage() async {
+  //    XFile? photo = await picker.pickImage(source: ImageSource.gallery);
+  //   if(photo ==null){
+  //     return null;
+  //   }
+  //   pikedImage=File(photo.path!);
+  //   // emit(GetImageFromGalaryState());
+  // }
 
 
   void isClearAbleTrue(){
@@ -289,6 +288,8 @@ class AuthCubit extends Cubit<TaskStates>{
   //..............
   TextEditingController projectNameController=TextEditingController();
   TextEditingController projectDescriptionController=TextEditingController();
+
+
   DateTime? endDate;
   //..............
   createProject()async{
@@ -310,6 +311,7 @@ class AuthCubit extends Cubit<TaskStates>{
     await currentIndexEqualZero();
 
   }
+
 
   //...........
 

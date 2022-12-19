@@ -7,7 +7,6 @@ const signUp='/signUp';
 const profileSetup='/profileSetupScreen';
 const bottomNavigationBar="/bottomNavigationBar";
 const taskDetailsScreen="/taskDetailsScreen";
-const createTaskScreen ="/createTaskScreen";
 const createProjectScreen='/createProjectScreen';
 const createTeamScreen="/createTeamScreen";
 const selectMemberScreen="/selectMemberScreen";

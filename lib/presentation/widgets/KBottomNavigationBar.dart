@@ -140,7 +140,7 @@ class KBottomNavigationBar extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: KSize.getHeight(context, 230),
+                height: KSize.getHeight(context, 180),
                 width: KSize.getWidth(context, 327),
                 margin:const EdgeInsets.only(bottom: 24),
                 decoration: BoxDecoration(
@@ -168,34 +168,6 @@ class KBottomNavigationBar extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/png/Add.png",
-                              fit: BoxFit.scaleDown,
-                              height: KSize.getHeight(context, 26.0),
-                              width: KSize.getWidth(context, 26),
-                            ),
-                            SizedBox(width: KSize.getWidth(context, 20.0)),
-                            Material(
-                              child: Text(
-                                "Create Task",
-                                style: KTextStyle.headline6.copyWith(fontSize: 18, height: 20 / 18),
-                              ),
-                            )
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.pushReplacementNamed(
-                            context, createTaskScreen);
-                        },
-                      ),
-                      Container(
-                          margin: EdgeInsets.symmetric(vertical: KSize.getHeight(context, 18.0)),
-                          height: KSize.getHeight(context, 1.0),
-                          width: KSize.getWidth(context, 267.0),
-                          color: KColor.cultured4),
                       GestureDetector(
                         child: Row(
                           children: [

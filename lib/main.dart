@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wtasks/presentation/screens/CreateProjectScreen.dart';
-import 'package:wtasks/presentation/screens/CreateTaskScreen.dart';
 import 'package:wtasks/presentation/screens/CreateTeamScreen.dart';
 import 'package:wtasks/presentation/screens/LogInPassword.dart';
 import 'package:wtasks/presentation/screens/OnBoardingScreen.dart';
@@ -17,7 +16,6 @@ import 'package:wtasks/presentation/widgets/KBottomNavigationBar.dart';
 import 'buisiness_logic/bloc_observer.dart';
 import 'buisiness_logic/cuibits/AuthCubit.dart';
 import 'buisiness_logic/cuibits/OnBordringCubit.dart';
-import 'buisiness_logic/cuibits/TaskDetailsCubit.dart';
 import 'buisiness_logic/task_states.dart';
 import 'constant/string.dart';
 import 'data/repository/Repository.dart';
@@ -33,7 +31,6 @@ void main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  // await Repository(WebServices()).getUsers();
 
   final pref = await SharedPreferences.getInstance();
 
@@ -55,12 +52,7 @@ class TaskManagement extends StatelessWidget {
         BlocProvider<AuthCubit>(
           create: (BuildContext context) => AuthCubit(repository)..currentIndexEqualZero(),
         ),
-        BlocProvider<TaskDetailsCubit>(
-          create: (BuildContext context) => TaskDetailsCubit(),
-        ),
-        BlocProvider<TaskDetailsCubit>(
-          create: (BuildContext context) => TaskDetailsCubit(),
-        ),
+
       ],
       child: BlocConsumer<AuthCubit,TaskStates>(
         listener: (context,states){},
@@ -80,7 +72,6 @@ class TaskManagement extends StatelessWidget {
             signUp:(_)=>SignUpScreen(),
             profileSetup:(_)=>ProfileSetupScreen(),
             bottomNavigationBar:(_)=>KBottomNavigationBar(),
-            createTaskScreen:(_)=>CreateTaskScreen(),
             createProjectScreen:(_)=>CreateProjectScreen(),
             createTeamScreen:(_)=>CreateTeamScreen(),
             selectMemberScreen:(_)=>SelectMemberScreen(),

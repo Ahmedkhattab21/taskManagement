@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wtasks/presentation/screens/loginScreen.dart';
 import '../../buisiness_logic/cuibits/AuthCubit.dart';
 import '../../buisiness_logic/task_states.dart';
 
 
 import '../../constant/k_size.dart';
-import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
 import '../widgets/button.dart';
@@ -54,8 +52,7 @@ class ProfileSetupScreen extends StatelessWidget {
                         child: Container(
                           height: KSize.getHeight(context, 80),
                           width: KSize.getWidth(context, 80),
-                           decoration:AuthCubit.get(context).pikedImage==null?
-                         const BoxDecoration(
+                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: KColor.cultured5,
                           image:DecorationImage(
@@ -64,26 +61,18 @@ class ProfileSetupScreen extends StatelessWidget {
                           ),
                           ),
                           )
-                            :const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: KColor.cultured5),
-                          child: AuthCubit.get(context).pikedImage==null?null
-                              :CircleAvatar(
-                             backgroundImage :FileImage(
-                               AuthCubit.get(context).pikedImage!,
-                              )),
                         ),
                       ),
                       SizedBox(height: KSize.getWidth(context, 10)),
-                      Center(child: Builder(
-                        builder: (context) {
-                          return GestureDetector(
-                              onTap: () {
-                                _showDialog(context);
-                              },
-                              child: Text("Upload Image", style: KTextStyle.subtitle2.copyWith(fontSize: 10.0, color: KColor.ultramarineBlue)));
-                        }
-                      )),
+                      // Center(child: Builder(
+                      //   builder: (context) {
+                      //     return GestureDetector(
+                      //         onTap: () {
+                      //           _showDialog(context);
+                      //         },
+                      //         child: Text("Upload Image", style: KTextStyle.subtitle2.copyWith(fontSize: 10.0, color: KColor.ultramarineBlue)));
+                      //   }
+                      // )),
                       SizedBox(height: KSize.getHeight(context, 50)),
                      KTextField(
                        text: "Name",
@@ -120,40 +109,40 @@ class ProfileSetupScreen extends StatelessWidget {
       ),
     );
   }
-  void _showDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext contex) {
-          return AlertDialog(
-            backgroundColor: Colors.white,
-            title:const Text("Select attachment source"),
-            content: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                     AuthCubit.get(context).getImage();
-                    Navigator.of(context).pop();
-                  },
-                  child: Image.asset(
-                    "assets/png/camera.png", height: 30, width: 30,),
-                ),
-                SizedBox(
-                  width: KSize.getWidth(context, 30),
-                ),
-                GestureDetector(
-                    onTap: () {
-                       AuthCubit.get(context).galleyImage();
-                      Navigator.of(context).pop();
-                    },
-                    child: Image.asset(
-                      "assets/png/gllery.png", height: 30, width: 30,)
-                )
-              ],
-            ),
-
-          );
-        }
-    );
-  }
+  // void _showDialog(BuildContext context) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (BuildContext contex) {
+  //         return AlertDialog(
+  //           backgroundColor: Colors.white,
+  //           title:const Text("Select attachment source"),
+  //           content: Row(
+  //             children: [
+  //               GestureDetector(
+  //                 onTap: () {
+  //                    AuthCubit.get(context).getImage();
+  //                   Navigator.of(context).pop();
+  //                 },
+  //                 child: Image.asset(
+  //                   "assets/png/camera.png", height: 30, width: 30,),
+  //               ),
+  //               SizedBox(
+  //                 width: KSize.getWidth(context, 30),
+  //               ),
+  //               GestureDetector(
+  //                   onTap: () {
+  //                      AuthCubit.get(context).galleyImage();
+  //                     Navigator.of(context).pop();
+  //                   },
+  //                   child: Image.asset(
+  //                     "assets/png/gllery.png", height: 30, width: 30,)
+  //               )
+  //             ],
+  //           ),
+  //
+  //         );
+  //       }
+  //   );
+  // }
 
 }
