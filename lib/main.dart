@@ -9,7 +9,6 @@ import 'package:wtasks/presentation/screens/ProfileScreen.dart';
 import 'package:wtasks/presentation/screens/SelectMemberScreen.dart';
 import 'package:wtasks/presentation/screens/SplashScreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wtasks/presentation/screens/home.dart';
 import 'package:wtasks/presentation/screens/loginScreen.dart';
 import 'package:wtasks/presentation/screens/signUpScreen.dart';
 import 'package:wtasks/presentation/screens/profileSetupScreen.dart';

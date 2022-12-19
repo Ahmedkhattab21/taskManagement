@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:wtasks/constant/string.dart';
+import 'package:wtasks/data/model/createProjReqest_model.dart';
 
 class WebServices{
   Future login(String email ,String pass)async{
@@ -151,6 +152,30 @@ class WebServices{
       throw "error in create Team";
     }
   }
-
+  Future createProject(String title,String dueDate, String description,Member members)async{
+    final prefs = await SharedPreferences.getInstance();
+    if( !prefs.containsKey('token')){
+      throw "error in get token";
+    }
+    String? token= prefs.getString('token');
+    String url =baseUrl+"/api/project/add";
+    final response= await http.post(
+        Uri.parse(url),
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":"Bearer $token",
+        },
+        body:  json.encode({
+          "title": title,
+          "dueDate": dueDate,
+          "description": description,
+          "member":members.toJson(),
+        }));
+    if(response.statusCode==200){
+      return json.decode(response.body);
+    }else{
+      throw "error in create Project";
+    }
+  }
 
 }

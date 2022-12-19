@@ -35,7 +35,7 @@ class CreateTeamScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
               )),
-          title: Text("Create Team", style: KTextStyle.appBar),
+          title:const Text("Create Team", style: KTextStyle.appBar),
           backgroundColor: KColor.white,
           elevation: 0,
           centerTitle: true,

@@ -6,8 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wtasks/data/model/createProjReqest_model.dart' as mm;
+import 'package:intl/intl.dart';
 
-import '../../data/model/Login_model.dart';
+
 import '../../data/model/projects_model.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
@@ -178,9 +180,9 @@ class AuthCubit extends Cubit<TaskStates>{
     }
   }
 
-
+///
   getAllProjects()async{
-   await repository.getAllProjects().then((value) {
+   await repository.getAllProjects().then((value)async {
       if(value.isEmpty){
         emit(OnEmptyProjectsState());
         return ;
@@ -284,6 +286,46 @@ class AuthCubit extends Cubit<TaskStates>{
     await currentIndexEqualZero();
 
   }
+  //..............
+  TextEditingController projectNameController=TextEditingController();
+  TextEditingController projectDescriptionController=TextEditingController();
+  DateTime? endDate;
+  //..............
+  createProject()async{
+    List<int> elements=[];
+    selectMemberModel.forEach((element) {
+      if(element['isSelect']){
+        elements.add(element['id']);
+      }
+    });
+    await repository.createProject(projectNameController.text,
+      endDate==null?DateFormat.MMMMEEEEd().format(DateTime.now()) : DateFormat.MMMMEEEEd().format(endDate!),
+        projectDescriptionController.text,mm.Member(users: elements,teams: [1])).
+    then((value)async {
+      // await currentIndexEqualZero();
+      emit(OnCreateTeamSuccessState());
+    } ).catchError((error){
+      emit(OnCreateTeamErrorState());
+    });
+    await currentIndexEqualZero();
+
+  }
+
+  //...........
+
+
+
+
+  changeDate(context)async{
+    endDate= await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate:DateTime.now(),
+    lastDate: DateTime(2101),
+    );
+    emit(OnChangeDateState());
+  }
+
 
 
 

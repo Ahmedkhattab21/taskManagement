@@ -65,6 +65,8 @@ class OnGetUserLoadingState extends TaskStates{}
 class OnCreateTeamSuccessState extends TaskStates{}
 class OnCreateTeamErrorState extends TaskStates{}
 
+class OnChangeDateState extends TaskStates{}
+
 
 class ChangeCurrentIndexState extends TaskStates{}
 

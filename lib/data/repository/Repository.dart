@@ -1,7 +1,10 @@
 import '../model/Login_model.dart';
+import '../model/createProjectRes_model.dart';
 import '../model/createTeam_model.dart';
 import '../model/edit_profile.dart'as e ;
 import '../model/profile_model.dart' as Profile;
+import 'package:wtasks/data/model/createProjReqest_model.dart' as mm;
+
 import '../model/projects_model.dart';
 import '../model/users_model.dart'as u;
 import '../web_services/web_services.dart';
@@ -64,6 +67,14 @@ class Repository{
     try{
       Map<String,dynamic> teamAdded=await webServices.createTeam(title, members);
       return CreateTeamModel.fromJson(teamAdded);
+    }catch(e){
+      throw "error in create team";
+    }
+  }
+  Future<createProjectRes_model> createProject(String title,String dueDate, String description,mm.Member members)async{
+    try{
+      Map<String,dynamic> projectCreated=await webServices.createProject(title,dueDate, description,members);
+      return createProjectRes_model.fromJson(projectCreated);
     }catch(e){
       throw "error in create team";
     }

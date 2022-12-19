@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:wtasks/data/model/createProjReqest_model.dart' as mm;
 
 import '../../buisiness_logic/cuibits/AuthCubit.dart';
 import '../../buisiness_logic/task_states.dart';
@@ -9,6 +10,8 @@ import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
 import '../../data/model/projects_model.dart';
+import '../../data/repository/Repository.dart';
+import '../../data/web_services/web_services.dart';
 import '../widgets/TaskCard.dart';
 import '../widgets/TaskDetailsCard.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,9 +77,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   onTap: () async{
-                   await AuthCubit.get(context).getProfile();
-                    Navigator.pushNamed(
-                        context, profileScreen);
+
+                    Repository(WebServices()).createProject("Waqty22", "12-11-2023" ,
+                       " ipsum dolor sit amet ",mm.Member(teams:[1],users:[1]));
+                   // await AuthCubit.get(context).getProfile();
+                   //  Navigator.pushNamed(
+                   //      context, profileScreen);
                   },
                 ),
               ),

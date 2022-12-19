@@ -126,7 +126,27 @@ class SelectMemberScreen extends StatelessWidget {
           );
         }
         else if(states is OnGetUsersErrorState){
-          return const Scaffold(
+          return  Scaffold(
+            appBar:AppBar(
+              leading: Padding(
+                  padding: EdgeInsets.only(left: KSize.getWidth(context, 24)),
+                  child: GestureDetector(
+                    child: Image.asset(
+                      "assets/png/Back2.png",
+                      height: KSize.getHeight(context, 30),
+                      width: KSize.getWidth(context, 30),
+                    ),
+                    onTap: () {
+                      ///
+
+                      Navigator.pop(context);
+                    },
+                  )),
+              title:const Text("Select Member", style: KTextStyle.appBar),
+              backgroundColor: KColor.white,
+              elevation: 0,
+              centerTitle: true,
+            ),
             body: Center(child:Text("No Users Found"),),
           );
         }
