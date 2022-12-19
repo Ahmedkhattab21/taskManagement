@@ -81,7 +81,6 @@ class TaskDetailsScreen extends StatelessWidget {
                           SizedBox(
                             height: KSize.getHeight(context, 8),
                           ),
-                          //"${projectData.users.map((e) => "${e.name }\n ffffccccccccccccc fffffffff ")}".substring(1).replaceAll(")","")
                         Text("${projectData.users.map((e) => "${e.name }\n ")}".substring(1).replaceAll(")",""),
                              overflow: TextOverflow.fade, //new
                              style: KTextStyle.subtitle1.copyWith(fontFamily: 'Popppins', height: 18 / 16, fontWeight: FontWeight.w600)
