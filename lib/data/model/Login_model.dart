@@ -25,7 +25,7 @@ class UserData{
   dynamic emailVerifiedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  String phone;
+  dynamic phone;
   dynamic googleId;
 
   UserData({

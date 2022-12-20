@@ -31,7 +31,6 @@ class WebServices{
   Future googleLogin()async{
     final user= await  GoogleSignInApi.login();
     if(user  !=null ){
-      print(222);
       GoogleSignInAuthentication googleSignInAuthentication =
       await user.authentication;
       print(googleSignInAuthentication.accessToken);
@@ -47,7 +46,6 @@ class WebServices{
             "email":user.email
           }));
       if(response.statusCode==200){
-        print(1212);
         return json.decode(response.body);
       }else{
         throw "error in login with google";

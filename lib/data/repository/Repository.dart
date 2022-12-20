@@ -24,6 +24,9 @@ class Repository{
   Future<LoginModel> googleLogin()async{
     try {
       Map<String,dynamic> user = await webServices.googleLogin();
+      print(121212);
+      print(LoginModel.fromJson(user));
+      print(131313);
       return LoginModel.fromJson(user);
     }catch(e){
       throw "error in Login with google";
