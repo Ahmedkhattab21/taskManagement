@@ -124,6 +124,22 @@ class AuthCubit extends Cubit<TaskStates>{
 
     );
   }
+
+  googleLogin()async{
+    emit(OnLoadingState());
+    await repository.googleLogin().
+    then((value)async{
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('token',value.authorisation.token);
+      print( value.authorisation.token);
+      emit(OnLoginSuccessState());
+    }).catchError((catcError){
+      emit(OnLoginErrorState(catcError.toString()));
+    }
+    );
+  }
+
+
   register(){
     emit(OnLoadingState());
     repository.register(nameControllerUp.text.toString(),

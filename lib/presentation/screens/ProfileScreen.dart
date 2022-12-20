@@ -8,6 +8,7 @@ import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
 import '../../data/model/profile_model.dart';
+import '../../services/services.dart';
 import '../widgets/KAppbar.dart';
 import 'EditProfileScreen.dart';
 import 'WelcomeScreen.dart';
@@ -171,8 +172,9 @@ class ProfileScreen extends StatelessWidget {
                   Align(
                       alignment: Alignment.center,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: ()async {
                           AuthCubit.get(context).logout();
+                          await GoogleSignInApi.logout();
                           Navigator
                               .pushNamedAndRemoveUntil(context,onBoardingScreen, (Route<dynamic> route) => false);
 

@@ -36,22 +36,22 @@ class WebServices{
       await user.authentication;
       print(googleSignInAuthentication.accessToken);
       print(user.email);
-      // String url =baseUrl+"/api/auth/google";
-      // final response= await http.post(
-      //     Uri.parse(url),
-      //     headers:{
-      //       "Content-Type":"application/json"
-      //     },
-      //     body: json.encode({
-      //       "token":googleSignInAuthentication.accessToken,
-      //       "email":user.email
-      //     }));
-      // if(response.statusCode==200){
-      //   print(1212);
-      //   return json.decode(response.body);
-      // }else{
-      //   throw "error in login with google";
-      // }
+      String url =baseUrl+"/api/auth/google";
+      final response= await http.post(
+          Uri.parse(url),
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body: json.encode({
+            "token":googleSignInAuthentication.accessToken,
+            "email":user.email
+          }));
+      if(response.statusCode==200){
+        print(1212);
+        return json.decode(response.body);
+      }else{
+        throw "error in login with google";
+      }
     }
 
   }

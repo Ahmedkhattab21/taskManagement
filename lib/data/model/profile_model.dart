@@ -40,7 +40,7 @@ class Data {
   dynamic emailVerifiedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  String phone;
+  dynamic phone;
   dynamic googleId;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(

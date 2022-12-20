@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wtasks/buisiness_logic/cuibits/AuthCubit.dart';
 
 import '../../buisiness_logic/cuibits/OnBordringCubit.dart';
 import '../../buisiness_logic/task_states.dart';
@@ -66,11 +67,9 @@ class OnBoardingScreen extends StatelessWidget {
                           buttonWidth: 311,
                           buttonBorderRadius: 20,
                           onPressedCallback: () async{
-                           await WebServices().googleLogin();
-                            // Navigator.pushReplacement(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => KBottomNavigationBar()),
-                            // );
+                           await AuthCubit.get(context).googleLogin();
+                           Navigator
+                               .pushNamedAndRemoveUntil(context,bottomNavigationBar, (Route<dynamic> route) => false);
                           },
                         ),
                       ],
@@ -86,9 +85,8 @@ class OnBoardingScreen extends StatelessWidget {
                                 TextSpan(
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = ()async {
-                                       await GoogleSignInApi.logout();
-                                        // fromSign=false;
-                                        // Navigator.pushNamed(context, logInEmail);
+                                        fromSign=false;
+                                        Navigator.pushNamed(context, logInEmail);
                                       },
                                     text: " Sign in",
                                     style: KTextStyle.body2.copyWith(color: KColor.ultramarineBlue))

@@ -21,12 +21,12 @@ class Repository{
       throw "error in Login ";
     }
   }
-  Future<LoginModel> googleLogin(String email ,String pass)async{
+  Future<LoginModel> googleLogin()async{
     try {
-      Map<String,dynamic> user = await webServices.login(email, pass);
+      Map<String,dynamic> user = await webServices.googleLogin();
       return LoginModel.fromJson(user);
     }catch(e){
-      throw "error in Login ";
+      throw "error in Login with google";
     }
   }
 
@@ -50,6 +50,9 @@ class Repository{
   Future<Profile.Data> getProfile()async {
     try{
       Map<String,dynamic> projects=await webServices.getProfile();
+      print(4444);
+      print(Profile.ProfileModel.fromJson(projects).data);
+      print(55555);
       return Profile.ProfileModel.fromJson(projects).data;
     }catch(e){
       throw "error in getProfile";
