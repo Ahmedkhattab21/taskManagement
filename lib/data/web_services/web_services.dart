@@ -33,8 +33,6 @@ class WebServices{
     if(user  !=null ){
       GoogleSignInAuthentication googleSignInAuthentication =
       await user.authentication;
-      print(googleSignInAuthentication.accessToken);
-      print(user.email);
       String url =baseUrl+"/api/auth/google";
       final response= await http.post(
           Uri.parse(url),
