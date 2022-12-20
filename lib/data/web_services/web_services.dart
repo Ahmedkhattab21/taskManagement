@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 
 import 'package:http/http.dart' as http;
 import 'package:wtasks/constant/string.dart';
 import 'package:wtasks/data/model/createProjReqest_model.dart'as cr;
+
+import '../../services/services.dart';
 
 
 class WebServices{
@@ -24,6 +27,33 @@ class WebServices{
     }else{
       throw "error in login";
     }
+  }
+  Future googleLogin()async{
+    final user= await  GoogleSignInApi.login();
+    if(user  !=null ){
+      print(222);
+      GoogleSignInAuthentication googleSignInAuthentication =
+      await user.authentication;
+      print(googleSignInAuthentication.accessToken);
+      print(user.email);
+      // String url =baseUrl+"/api/auth/google";
+      // final response= await http.post(
+      //     Uri.parse(url),
+      //     headers:{
+      //       "Content-Type":"application/json"
+      //     },
+      //     body: json.encode({
+      //       "token":googleSignInAuthentication.accessToken,
+      //       "email":user.email
+      //     }));
+      // if(response.statusCode==200){
+      //   print(1212);
+      //   return json.decode(response.body);
+      // }else{
+      //   throw "error in login with google";
+      // }
+    }
+
   }
 
   Future register(String name ,String email ,String pass,String phone)async{

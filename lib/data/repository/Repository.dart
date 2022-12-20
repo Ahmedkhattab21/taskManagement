@@ -21,6 +21,14 @@ class Repository{
       throw "error in Login ";
     }
   }
+  Future<LoginModel> googleLogin(String email ,String pass)async{
+    try {
+      Map<String,dynamic> user = await webServices.login(email, pass);
+      return LoginModel.fromJson(user);
+    }catch(e){
+      throw "error in Login ";
+    }
+  }
 
   Future register(String name ,String email ,String pass,String phone)async{
     try {

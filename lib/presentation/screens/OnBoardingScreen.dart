@@ -9,6 +9,8 @@ import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
 import '../../constant/my_colors.dart';
 import '../../constant/string.dart';
+import '../../data/web_services/web_services.dart';
+import '../../services/services.dart';
 import '../widgets/button.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -63,7 +65,8 @@ class OnBoardingScreen extends StatelessWidget {
                           buttonHeight: 62,
                           buttonWidth: 311,
                           buttonBorderRadius: 20,
-                          onPressedCallback: () {
+                          onPressedCallback: () async{
+                           await WebServices().googleLogin();
                             // Navigator.pushReplacement(
                             //   context,
                             //   MaterialPageRoute(builder: (context) => KBottomNavigationBar()),
@@ -82,9 +85,10 @@ class OnBoardingScreen extends StatelessWidget {
                               children: [
                                 TextSpan(
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        fromSign=false;
-                                        Navigator.pushNamed(context, logInEmail);
+                                      ..onTap = ()async {
+                                       await GoogleSignInApi.logout();
+                                        // fromSign=false;
+                                        // Navigator.pushNamed(context, logInEmail);
                                       },
                                     text: " Sign in",
                                     style: KTextStyle.body2.copyWith(color: KColor.ultramarineBlue))
