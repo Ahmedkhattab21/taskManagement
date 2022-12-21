@@ -16,18 +16,19 @@ class Repository{
   Future<LoginModel> login(String email ,String pass)async{
     try {
       Map<String,dynamic> user = await webServices.login(email, pass);
-      return LoginModel.fromJson(user);
+        return LoginModel.fromJson(user);
     }catch(e){
       throw "error in Login ";
     }
   }
-  Future<LoginModel> googleLogin()async{
+  Future<LoginModel?> googleLogin()async{
     try {
-      Map<String,dynamic> user = await webServices.googleLogin();
-      print(121212);
-      print(LoginModel.fromJson(user));
-      print(131313);
-      return LoginModel.fromJson(user);
+      Map<String,dynamic>? user = await webServices.googleLogin();
+      if(user ==null){
+        return null;
+      }else {
+        return LoginModel.fromJson(user);
+      }
     }catch(e){
       throw "error in Login with google";
     }

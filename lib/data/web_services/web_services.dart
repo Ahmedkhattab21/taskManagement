@@ -29,10 +29,17 @@ class WebServices{
     }
   }
   Future googleLogin()async{
-    final user= await  GoogleSignInApi.login();
-    if(user  !=null ){
+    print(0001);
+    // final user1= await  GoogleSignInApi.login();
+    var user2=await GoogleSignInApi.user();
+    // uu.email;
+
+    if(user2 == null){
+      print("no user found");
+      return null ;
+    }else{
       GoogleSignInAuthentication googleSignInAuthentication =
-      await user.authentication;
+      await user2.authentication;
       String url =baseUrl+"/api/auth/google";
       final response= await http.post(
           Uri.parse(url),
@@ -41,7 +48,7 @@ class WebServices{
           },
           body: json.encode({
             "token":googleSignInAuthentication.accessToken,
-            "email":user.email
+            "email":user2.email
           }));
       if(response.statusCode==200){
         return json.decode(response.body);

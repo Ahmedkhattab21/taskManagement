@@ -218,7 +218,7 @@ class TaskDetailsScreen extends StatelessWidget {
                                 width: 1,
                               ),
                               shape: BoxShape.circle,
-                              image: const DecorationImage(image: AssetImage('assets/png/Image1.png'))),
+                              image: const DecorationImage(image: AssetImage('assets/png/logo.png'))),
                         ),
                       ),
                     ],

@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wtasks/buisiness_logic/cuibits/AuthCubit.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
@@ -8,6 +10,7 @@ import '../../constant/my_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constant/string.dart';
+import 'button.dart';
 
 
 
@@ -42,6 +45,84 @@ class KBottomNavigationBar extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+          );
+        }
+        else if(states is OnNotLoginState){
+          return Scaffold(
+            body: SingleChildScrollView(
+              child: Column(children: <Widget>[
+                SizedBox(height: KSize.getHeight(context, 65.0)),
+
+                ///Slider
+                Container(
+                  height: KSize.getHeight(context, 510),
+                  child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    onPageChanged: (index) {
+                      AuthCubit.get(context).changingPage(index);
+                    },
+                    controller: AuthCubit.get(context).controller,
+                    itemCount: AuthCubit.get(context).pages.length,
+                    itemBuilder: (context, int index) {
+                      return AuthCubit.get(context).pages[index];
+                    },
+                  ),
+                ),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: KSize.getWidth(context, 24.0), top: KSize.getHeight(context, 9)),
+                        child: DotsIndicator(
+                          dotsCount:AuthCubit.get(context).pages.length,
+                          position: AuthCubit.get(context).currentPage.toDouble(),
+                          decorator: DotsDecorator(activeColor: KColor.ultramarineBlue),
+                        ),
+                      ),
+                      SizedBox(height: KSize.getHeight(context, 40.0)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          KButton(
+                            title: 'Sign in with Google',
+                            buttonTextStyle: KTextStyle.button.copyWith(
+                              fontSize: 15,
+                              height: 17 / 15,
+                            ),
+                            buttonHeight: 62,
+                            buttonWidth: 311,
+                            buttonBorderRadius: 20,
+                            onPressedCallback: () async{
+                            await AuthCubit.get(context).googleLogin();
+                            }
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: KSize.getHeight(context, 16)),
+                      Center(
+                        child: GestureDetector(
+                          child: RichText(
+                            text: TextSpan(
+                                text: "Already have an account?",
+                                style: KTextStyle.body2,
+                                children: [
+                                  TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = ()async {
+                                          fromSign=false;
+                                          Navigator.pushNamed(context, logInEmail);
+                                        },
+                                      text: " Sign in",
+                                      style: KTextStyle.body2.copyWith(color: KColor.ultramarineBlue))
+                                ]),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: KSize.getHeight(context, 80))
+                    ]),
+              ]),
             ),
           );
         }

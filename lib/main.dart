@@ -15,7 +15,6 @@ import 'package:wtasks/presentation/widgets/KBottomNavigationBar.dart';
 
 import 'buisiness_logic/bloc_observer.dart';
 import 'buisiness_logic/cuibits/AuthCubit.dart';
-import 'buisiness_logic/cuibits/OnBordringCubit.dart';
 import 'buisiness_logic/task_states.dart';
 import 'constant/string.dart';
 import 'data/repository/Repository.dart';
@@ -46,9 +45,7 @@ class TaskManagement extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider<OnBordringCubit>(
-          create: (BuildContext context) => OnBordringCubit(),
-        ),
+
         BlocProvider<AuthCubit>(
           create: (BuildContext context) => AuthCubit(repository)..currentIndexEqualZero(),
         ),

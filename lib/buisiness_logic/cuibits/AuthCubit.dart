@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';
+import '../../presentation/widgets/customOnBordering.dart';
 import '../task_states.dart';
 
 class AuthCubit extends Cubit<TaskStates>{
@@ -31,6 +32,9 @@ class AuthCubit extends Cubit<TaskStates>{
   TextEditingController passControllerUp = TextEditingController();
   TextEditingController nameControllerUp = TextEditingController();
   TextEditingController phoneControllerUp = TextEditingController();
+
+
+
 
 
   //
@@ -56,6 +60,17 @@ class AuthCubit extends Cubit<TaskStates>{
   //   // emit(GetImageFromGalaryState());
   // }
 
+  int currentPage = 0;
+  PageController controller = PageController();
+  List<Widget> pages = [
+    const CustomOnBoarding(title: "Task,\nCalendar,\nChat", image: "assets/png/Ai2.png"),
+    const CustomOnBoarding(title: "Work With\nTeam\nAnytime", image: "assets/png/Ai3.png"),
+  ];
+
+  changingPage(index) {
+    currentPage = index;
+     emit(OnNotLoginState());
+  }
 
   void isClearAbleTrue(){
     isClearAble=true;
@@ -127,12 +142,19 @@ class AuthCubit extends Cubit<TaskStates>{
 
   googleLogin()async{
     emit(OnLoadingState());
+    print(1212);
     await repository.googleLogin().
     then((value)async{
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('token',value.authorisation.token);
-      print( value.authorisation.token);
-      emit(OnLoginSuccessState());
+      if(value == null ){
+        emit(OnNotLoginState());
+      }else{
+        print(1313);
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('token',value.authorisation.token);
+        print( value.authorisation.token);
+        emit(OnLoginSuccessState());
+      }
+
     }).catchError((catcError){
       emit(OnLoginErrorState(catcError.toString()));
     }

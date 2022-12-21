@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wtasks/buisiness_logic/cuibits/AuthCubit.dart';
 
-import '../../buisiness_logic/cuibits/OnBordringCubit.dart';
 import '../../buisiness_logic/task_states.dart';
 import '../../constant/k_size.dart';
 import '../../constant/k_textStyle.dart';
@@ -18,7 +17,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OnBordringCubit,TaskStates>(
+    return BlocConsumer<AuthCubit,TaskStates>(
       listener:(context,state){} ,
       builder: (context,state){
         return Scaffold(
@@ -32,12 +31,12 @@ class OnBoardingScreen extends StatelessWidget {
                 child: PageView.builder(
                   scrollDirection: Axis.horizontal,
                   onPageChanged: (index) {
-                    OnBordringCubit.get(context).changingPage(index);
+                    AuthCubit.get(context).changingPage(index);
                   },
-                  controller: OnBordringCubit.get(context).controller,
-                  itemCount: OnBordringCubit.get(context).pages.length,
+                  controller: AuthCubit.get(context).controller,
+                  itemCount: AuthCubit.get(context).pages.length,
                   itemBuilder: (context, int index) {
-                    return OnBordringCubit.get(context).pages[index];
+                    return AuthCubit.get(context).pages[index];
                   },
                 ),
               ),
@@ -48,8 +47,8 @@ class OnBoardingScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: KSize.getWidth(context, 24.0), top: KSize.getHeight(context, 9)),
                       child: DotsIndicator(
-                        dotsCount:OnBordringCubit.get(context).pages.length,
-                        position: OnBordringCubit.get(context).currentPage.toDouble(),
+                        dotsCount:AuthCubit.get(context).pages.length,
+                        position: AuthCubit.get(context).currentPage.toDouble(),
                         decorator:const DotsDecorator(activeColor: KColor.ultramarineBlue),
                       ),
                     ),
@@ -67,9 +66,12 @@ class OnBoardingScreen extends StatelessWidget {
                           buttonWidth: 311,
                           buttonBorderRadius: 20,
                           onPressedCallback: () async{
-                           await AuthCubit.get(context).googleLogin();
-                           Navigator
-                               .pushNamedAndRemoveUntil(context,bottomNavigationBar, (Route<dynamic> route) => false);
+                          await AuthCubit.get(context).googleLogin();
+                              Navigator
+                                  .pushNamedAndRemoveUntil(
+                                  context, bottomNavigationBar, (
+                                  Route<dynamic> route) => false);
+
                           },
                         ),
                       ],
