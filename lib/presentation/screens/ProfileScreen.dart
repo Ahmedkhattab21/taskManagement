@@ -173,8 +173,12 @@ class ProfileScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: GestureDetector(
                         onTap: ()async {
+                          print(1);
                           AuthCubit.get(context).logout();
-                          await GoogleSignInApi.logout();
+                          print(2);
+                          if(isLogByGoogle)
+                            await GoogleSignInApi.logout();
+                          print(3);
                           Navigator
                               .pushNamedAndRemoveUntil(context,onBoardingScreen, (Route<dynamic> route) => false);
 

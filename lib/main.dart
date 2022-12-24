@@ -32,9 +32,9 @@ void main() async{
   ]);
 
   final pref = await SharedPreferences.getInstance();
+  String? tok =pref.getString("token")??null;
 
-
-  runApp( TaskManagement( repository : Repository(WebServices()),token: pref.getString("token"),));
+  runApp( TaskManagement( repository : Repository(WebServices()),token: tok,));
 }
 
 class TaskManagement extends StatelessWidget {
@@ -46,9 +46,16 @@ class TaskManagement extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-
+        token == null ?
         BlocProvider<AuthCubit>(
-          create: (BuildContext context) => AuthCubit(repository)..currentIndexEqualZero(),
+          create: (BuildContext context) {
+            return AuthCubit(repository);
+          },
+        ):
+        BlocProvider<AuthCubit>(
+          create: (BuildContext context) {
+            return AuthCubit(repository)..currentIndexEqualZero()..loggedByGoogle();
+          },
         ),
 
       ],

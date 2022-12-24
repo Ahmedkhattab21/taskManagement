@@ -127,7 +127,9 @@ class AuthCubit extends Cubit<TaskStates>{
   }
   //.... data .........
    login()async{
-    emit(OnLoadingState());
+     isLogByGoogle=false;
+
+     emit(OnLoadingState());
     repository.login(emailControllerLogin.text.toString(),passwordControllerLogin.text.toString()).
     then((value)async{
       final prefs = await SharedPreferences.getInstance();
@@ -140,8 +142,11 @@ class AuthCubit extends Cubit<TaskStates>{
 
     );
   }
-
+loggedByGoogle(){
+  isLogByGoogle=true;
+}
   googleLogin()async{
+    isLogByGoogle=true;
     emit(OnLoadingState());
     print(1212);
     await repository.googleLogin().
@@ -251,7 +256,7 @@ class AuthCubit extends Cubit<TaskStates>{
 
   logout()async{
     final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    prefs.remove("token");
     emailControllerLogin.clear();
     passwordControllerLogin.clear();
     emit(LogOutState());

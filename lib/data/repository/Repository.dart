@@ -45,6 +45,7 @@ class Repository{
 
   Future<List<ProjectData>> getAllProjects()async {
     try{
+
       Map<String,dynamic> projects=await webServices.getAllProjects();
       return ProjectsModel.fromJson(projects).data.projects;
     }catch(e){
@@ -54,9 +55,6 @@ class Repository{
   Future<Profile.Data> getProfile()async {
     try{
       Map<String,dynamic> projects=await webServices.getProfile();
-      print(4444);
-      print(Profile.ProfileModel.fromJson(projects).data);
-      print(55555);
       return Profile.ProfileModel.fromJson(projects).data;
     }catch(e){
       throw "error in getProfile";

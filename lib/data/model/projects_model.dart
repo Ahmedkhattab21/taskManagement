@@ -61,7 +61,6 @@ class ProjectData{
   });
 
   factory ProjectData.fromJson(Map<String,dynamic> json){
-    print(888);
     return ProjectData(
         id: json['id'],
         title: json['title'],
