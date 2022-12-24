@@ -139,7 +139,7 @@ class Member {
   dynamic emailVerifiedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  dynamic phone;
+  String phone;
   dynamic googleId;
   MemberPivot pivot;
 
