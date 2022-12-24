@@ -35,7 +35,6 @@ class HomeScreen extends StatelessWidget {
           );
         }
         else if(states is OnGetProjectsErrorState){
-          String error=states.error;
           return const Scaffold(
               body:Center(child: Text("Error inn get data"))
           );

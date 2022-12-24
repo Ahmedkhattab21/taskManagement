@@ -33,6 +33,7 @@ void main() async{
 
   final pref = await SharedPreferences.getInstance();
 
+
   runApp( TaskManagement( repository : Repository(WebServices()),token: pref.getString("token"),));
 }
 
@@ -61,7 +62,8 @@ class TaskManagement extends StatelessWidget {
           ThemeData(fontFamily: 'Mulish'),
           debugShowCheckedModeBanner: false,
            initialRoute:splashScreen,
-          home: token==null?const SplashScreen():const KBottomNavigationBar(),
+            home: token==null?
+            const SplashScreen():const KBottomNavigationBar(),
           routes: {
             onBoardingScreen:(_)=>OnBoardingScreen(),
             logInEmail:(_)=>LogInEmail(),

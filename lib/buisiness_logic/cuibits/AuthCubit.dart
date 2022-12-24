@@ -10,6 +10,7 @@ import 'package:wtasks/data/model/createProjReqest_model.dart' as mm;
 import 'package:intl/intl.dart';
 
 
+import '../../constant/string.dart';
 import '../../data/repository/Repository.dart';
 import '../../presentation/screens/ProfileScreen.dart';
 import '../../presentation/screens/home.dart';
@@ -148,7 +149,6 @@ class AuthCubit extends Cubit<TaskStates>{
       if(value == null ){
         emit(OnNotLoginState());
       }else{
-        print(1313);
         final prefs = await SharedPreferences.getInstance();
         prefs.setString('token',value.authorisation.token);
         print( value.authorisation.token);
@@ -172,7 +172,6 @@ class AuthCubit extends Cubit<TaskStates>{
       print(value);
       emit(OnRegisterSuccessState());
     }).catchError((catcError){
-      print(catcError);
       emit(OnRegisterErrorState(catcError.toString()));
     }
 
@@ -227,6 +226,8 @@ class AuthCubit extends Cubit<TaskStates>{
       emit(OnGetProjectsSuccessState(value));
 
     }).catchError((error){
+      print(error);
+      print("error");
       emit(OnGetProjectsErrorState(error));
     });
 
@@ -254,6 +255,7 @@ class AuthCubit extends Cubit<TaskStates>{
     emailControllerLogin.clear();
     passwordControllerLogin.clear();
     emit(LogOutState());
+
 
   }
   editProfile()async{

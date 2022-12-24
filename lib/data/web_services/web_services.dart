@@ -29,7 +29,6 @@ class WebServices{
     }
   }
   Future googleLogin()async{
-    print(0001);
     // final user1= await  GoogleSignInApi.login();
     var user2=await GoogleSignInApi.user();
     // uu.email;
@@ -84,6 +83,7 @@ class WebServices{
     if( !prefs.containsKey('token')){
       throw "error in get token";
     }
+
     String? token= prefs.getString('token');
     String url =baseUrl+"/api/project";
     final response= await http.get(

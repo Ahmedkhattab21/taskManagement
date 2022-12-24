@@ -61,6 +61,7 @@ class ProjectData{
   });
 
   factory ProjectData.fromJson(Map<String,dynamic> json){
+    print(888);
     return ProjectData(
         id: json['id'],
         title: json['title'],
@@ -231,7 +232,7 @@ class User{
   dynamic emailVerifiedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  String phone;
+  dynamic phone;
   dynamic googleId;
   UserPivot pivot;
 
@@ -248,7 +249,7 @@ class User{
   });
 
   factory User.fromJson(Map<String,dynamic> json){
-    return User(
+     return User(
         id: json['id'],
         name: json['name'],
         email: json['email'],
